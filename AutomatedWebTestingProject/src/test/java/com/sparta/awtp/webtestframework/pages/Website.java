@@ -3,6 +3,7 @@ package com.sparta.awtp.webtestframework.pages;
 import org.openqa.selenium.WebDriver;
 
 public class Website {
+
     private final WebDriver webDriver;
     private final LoginPage loginPage;
     private final SignupPage signupPage;
@@ -10,6 +11,8 @@ public class Website {
     private final HomePage homePage;
     private final AccountCreatedPage accountCreatedPage;
     private final AllProductsPage allProductsPage;
+    private final ItemPage itemPage;
+    private final ViewCartPage viewCartPage;
 
     public Website(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -19,6 +22,8 @@ public class Website {
         this.homePage = new HomePage(webDriver);
         this.accountCreatedPage = new AccountCreatedPage(webDriver);
         this.allProductsPage = new AllProductsPage(webDriver);
+        this.itemPage = new ItemPage(webDriver);
+        this.viewCartPage = new ViewCartPage(webDriver);
     }
 
     public LoginPage getLoginPage() {
@@ -48,4 +53,13 @@ public class Website {
     public AllProductsPage getAllProductsPage() {
         return allProductsPage;
     }
+
+    public ItemPage getItemPage() {
+        return itemPage;
+    }
+
+    public ViewCartPage getViewCartPage() {
+        return viewCartPage;
+    }
 }
+
