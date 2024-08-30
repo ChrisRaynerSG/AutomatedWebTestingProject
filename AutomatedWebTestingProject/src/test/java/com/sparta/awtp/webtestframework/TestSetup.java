@@ -24,7 +24,7 @@ public class TestSetup {
     private static ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-//        options.addArguments("--headless"); // means it runs in the background without the GUI
+        options.addArguments("--headless"); // means it runs in the background without the GUI
         options.addArguments("--remote-allow-origins="); // allows access from the test program and CORS
         options.setImplicitWaitTimeout(Duration.ofSeconds(10));
         return options;

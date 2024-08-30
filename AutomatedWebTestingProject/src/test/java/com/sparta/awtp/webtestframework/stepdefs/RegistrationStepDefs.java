@@ -25,13 +25,13 @@ public class RegistrationStepDefs {
     private HomePage homePage;
     private AccountCreatedPage accountCreatedPage;
 
-    @After
+    @After("@registration")
     public void afterEach() {
         TestSetup.quitWebDriver();
         TestSetup.stopService();
     }
 
-    @Before
+    @Before("@registration")
     public void setup() throws Exception {
         TestSetup.startChromeService();
         TestSetup.createWebDriver();

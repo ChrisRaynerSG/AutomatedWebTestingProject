@@ -26,6 +26,18 @@ public class ReviewStepDefs {
     private static final String PRODUCT_DETAILS_URL = "https://automationexercise.com/product_details/1";
     private ProductDetailPage productDetailPage;
 
+    @Before("@ReviewFeature")
+    public static void setup() throws Exception {
+        TestSetup.startChromeService();
+        TestSetup.createWebDriver();
+    }
+
+    @After("@ReviewFeature")
+    public static void teardown() {
+        TestSetup.quitWebDriver();
+        TestSetup.stopService();
+    }
+
     @Given("I am on the product page")
     public void iAmOnTheProductPage() {
         Website website = TestSetup.getWebsite(PRODUCT_DETAILS_URL);
