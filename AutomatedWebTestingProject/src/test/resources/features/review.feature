@@ -3,8 +3,8 @@ Feature: Review
 
   @Happy
   Scenario: The review form should appear on the product page
-    Given I am on the homepage
-
+    Given I am on the product page
+    Then I should see the review submission form
 
   @Happy
   Scenario: Leaving a review with valid details
@@ -63,3 +63,17 @@ Feature: Review
       | fudge          |
       | bummer         |
 
+  @Sad
+  Scenario Outline: Leaving a review with invalid email formats should not be submitted
+    Given I am on the product page
+    And I enter a valid name
+    And I enter a review containing "Valid review"
+    And I enter an invalid email "<invalidEmail>"
+    When I click submit
+    Then I will not see a message informing me the submission is successful
+    Examples:
+      | invalidEmail    |
+      | invalidemail    |
+      | @missingdomain  |
+      | missingdomain@  |
+      | @               |

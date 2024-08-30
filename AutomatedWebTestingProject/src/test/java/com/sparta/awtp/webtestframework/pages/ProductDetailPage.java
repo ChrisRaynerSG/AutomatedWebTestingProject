@@ -33,6 +33,13 @@ public class ProductDetailPage {
         cookiesButton.click();
     }
 
+    public boolean reviewSubmissionFormIsPresent() {
+        WebElement nameElement = waitForElementToBeClickable(nameField);
+        WebElement emailElement = waitForElementToBeClickable(emailField);
+        WebElement reviewElement = waitForElementToBeClickable(reviewField);
+        return nameElement.isDisplayed() && emailElement.isDisplayed() && reviewElement.isDisplayed();
+    }
+
     public void enterName(String name) {
         WebElement nameElement = waitForElementToBeClickable(nameField);
         nameElement.clear();

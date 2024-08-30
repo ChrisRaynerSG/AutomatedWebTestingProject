@@ -11,6 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.messages.types.Product;
 import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -61,5 +62,20 @@ public class ReviewStepDefs {
     @And("I enter a review containing {string}")
     public void iEnterAReviewContaining(String review) {
         productDetailPage.enterReview(review);
+    }
+
+    @Then("I should see the review submission form")
+    public void iShouldSeeTheReviewSubmissionForm() {
+        Assertions.assertTrue(productDetailPage.reviewSubmissionFormIsPresent());
+    }
+
+    @And("I enter a valid name")
+    public void iEnterAValidName() {
+        productDetailPage.enterName("test_user");
+    }
+
+    @And("I enter an invalid email {string}")
+    public void iEnterAnInvalidEmail(String email) {
+        productDetailPage.enterEmail(email);
     }
 }
