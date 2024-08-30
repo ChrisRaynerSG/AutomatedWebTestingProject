@@ -5,6 +5,7 @@ Feature: Registration
   I should then be able to delete my account
 
   @happy
+    @registration
   Scenario Outline: Successful registration
     Given I am on the login page
     And I enter a valid name and email address
@@ -28,9 +29,11 @@ Feature: Registration
     Examples:
       | password | first_name | last_name | address1       | country       | state | city        | zipcode | mobile_number |
       | Pass1234 | John       | Doe       | 123 Elm Street | United States | CA    | Los Angeles | 90001   | 555-1234      |
+      | 1234     | John       | Doe       | 123 Elm Street | United States | CA    | Los Angeles | 90001   | 555-1234      |
     #    | Jane Smith | jane.smith@example.com | Pass5678  | Pass5678        | 22      | July      | 1985     | false       | true          | Jane       | Smith     | Smith Ltd | 456 Oak Avenue     |                | Canada         | ON       | Toronto    | M5A 1A1 | 416-5678      |
 
   @sad
+  @registration
   Scenario: register with pre-existing email address
     Given I am on the login page
     And I enter a valid name "abc"

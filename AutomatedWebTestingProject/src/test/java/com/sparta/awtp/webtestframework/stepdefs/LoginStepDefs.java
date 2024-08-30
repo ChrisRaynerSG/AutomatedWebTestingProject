@@ -1,7 +1,6 @@
 package com.sparta.awtp.webtestframework.stepdefs;
 
 import com.sparta.awtp.webtestframework.TestSetup;
-import com.sparta.awtp.webtestframework.pages.HomePage;
 import com.sparta.awtp.webtestframework.pages.LoginPage;
 import com.sparta.awtp.webtestframework.pages.Website;
 import io.cucumber.java.After;
@@ -17,7 +16,7 @@ public class LoginStepDefs {
     private static final String BASE_URL = "https://automationexercise.com/";
     private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";
 
-    @Before
+    @Before("@login")
     public void setup() throws Exception {
         TestSetup.startChromeService();
         TestSetup.createWebDriver();
@@ -25,7 +24,7 @@ public class LoginStepDefs {
         loginPage = website.getLoginPage();
     }
 
-    @After
+    @After("@login")
     public void afterEach() {
         TestSetup.quitWebDriver();
         TestSetup.stopService();
