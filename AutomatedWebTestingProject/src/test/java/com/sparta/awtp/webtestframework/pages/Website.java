@@ -9,6 +9,7 @@ public class Website {
     private final ProductDetailPage productDetailPage;
     private final HomePage homePage;
     private final AccountCreatedPage accountCreatedPage;
+    private final AllProductsPage allProductsPage;
 
     public Website(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -17,6 +18,7 @@ public class Website {
         this.productDetailPage = new ProductDetailPage(webDriver);
         this.homePage = new HomePage(webDriver);
         this.accountCreatedPage = new AccountCreatedPage(webDriver);
+        this.allProductsPage = new AllProductsPage(webDriver);
     }
 
     public LoginPage getLoginPage() {
@@ -41,5 +43,9 @@ public class Website {
 
     public ProductDetailPage getProductDetailPage() {
         return productDetailPage;
+    }
+
+    public AllProductsPage getAllProductsPage() {
+        return allProductsPage;
     }
 }
