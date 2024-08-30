@@ -6,12 +6,11 @@ import org.openqa.selenium.WebDriver;
 public class ItemPage {
 
     private WebDriver driver;
-    private By addToCart = new By.ByClassName("add-to-cart");
+    private By addToCart = new By.ByClassName("cart");
 
     public ItemPage(WebDriver driver) {
         this.driver = driver;
     }
-
     public void clickAddToCart() {
         driver.findElement(addToCart).click();
     }

@@ -1,22 +1,50 @@
 package com.sparta.awtp.webtestframework.stepdefs;
 
+import com.sparta.awtp.webtestframework.TestSetup;
+import com.sparta.awtp.webtestframework.pages.Website;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
+
+import java.io.IOException;
 
 public class PurchaseStepdefs {
-    @When("I click add to cart")
-    public void iClickAddToCart() {
 
+    private Website website;
+
+    @Before
+    public void setup() throws IOException {
+        TestSetup.startChromeService();
+        TestSetup.createWebDriver();
+    }
+
+    @After
+    public void afterEach() {
+        TestSetup.quitWebDriver();
+        TestSetup.stopService();
+    }
+
+    @When("I click add to cart from products or home")
+    public void iClickAddToCartFromProductsOrHome() {
+        website.getHomePage().clickAddToCart();
+    }
+    @When("I click add to cart from item page")
+    public void iClickAddToCartFromItemPage() {
+        website.getItemPage().clickAddToCart();
     }
 
     @And("the item is in stock")
     public void theItemIsInStock() {
+        //all items currently in stock
     }
 
     @Then("I should see my cart updated")
     public void iShouldSeeMyCartUpdated() {
+        website.getHomePage().clickCartModalViewCart();
     }
 
     @Given("I am on the products page")
@@ -25,6 +53,9 @@ public class PurchaseStepdefs {
 
     @Given("I am on a specific items page")
     public void iAmOnASpecificItemsPage() {
+        website = TestSetup.getWebsite(TestSetup.BASE_URL);
+        website.getHomePage().clickConsentButton();
+        website.getHomePage().clickViewProductButton();
     }
 
     @Given("I am on the view_cart page")

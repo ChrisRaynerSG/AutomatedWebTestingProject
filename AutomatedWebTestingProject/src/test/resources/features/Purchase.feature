@@ -1,20 +1,22 @@
 Feature: Purchase item from webpage
 
+  Background:
+
   Scenario: add item to cart from homepage
     Given I am on the homepage
-    When I click add to cart
+    When I click add to cart from products or home
     And the item is in stock
     Then I should see my cart updated
 
   Scenario: add item to cart from products page
     Given I am on the products page
-    When I click add to cart
+    When I click add to cart from products or home
     And the item is in stock
     Then I should see my cart updated
 
   Scenario: add item to cart from items page
     Given I am on a specific items page
-    When I click add to cart
+    When I click add to cart from item page
     And the item is in stock
     Then I should see my cart updated
 
