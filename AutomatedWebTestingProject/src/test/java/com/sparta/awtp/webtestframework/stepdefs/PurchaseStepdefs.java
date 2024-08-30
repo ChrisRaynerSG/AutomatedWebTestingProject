@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 public class PurchaseStepdefs {
     @When("I click add to cart")
     public void iClickAddToCart() {
+
     }
 
     @And("the item is in stock")
