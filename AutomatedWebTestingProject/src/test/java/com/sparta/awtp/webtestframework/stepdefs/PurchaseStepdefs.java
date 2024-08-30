@@ -30,6 +30,8 @@ public class PurchaseStepdefs {
 
     @When("I click add to cart from products or home")
     public void iClickAddToCartFromProductsOrHome() {
+        website = TestSetup.getWebsite(TestSetup.BASE_URL);
+        website.getHomePage().clickConsentButton();
         website.getHomePage().clickAddToCart();
     }
     @When("I click add to cart from item page")
