@@ -3,31 +3,57 @@ package com.sparta.awtp.webtestframework.pages;
 import org.openqa.selenium.WebDriver;
 
 public class Website {
-    private WebDriver webDriver;
-    private HomePage homePage;
-    private ItemPage itemPage;
-    private ViewCartPage viewCartPage;
+
+    private final WebDriver webDriver;
+    private final LoginPage loginPage;
+    private final SignupPage signupPage;
+    private final ProductDetailPage productDetailPage;
+    private final HomePage homePage;
+    private final AccountCreatedPage accountCreatedPage;
+    private final ItemPage itemPage;
+    private final ViewCartPage viewCartPage;
 
     public Website(WebDriver webDriver) {
         this.webDriver = webDriver;
-        homePage = new HomePage(webDriver);
-        itemPage = new ItemPage(webDriver);
-        viewCartPage = new ViewCartPage(webDriver);
+        this.loginPage = new LoginPage(webDriver);
+        this.signupPage = new SignupPage(webDriver);
+        this.productDetailPage = new ProductDetailPage(webDriver);
+        this.homePage = new HomePage(webDriver);
+        this.accountCreatedPage = new AccountCreatedPage(webDriver);
+        this.itemPage = new ItemPage(webDriver);
+        this.viewCartPage = new ViewCartPage(webDriver);
     }
+
+    public LoginPage getLoginPage() {
+        return loginPage;
+    }
+
+    public SignupPage getSignupPage() {
+        return signupPage;
+    }
+
     public HomePage getHomePage() {
         return homePage;
     }
-    public ItemPage getItemPage() {
-        return itemPage;
+
+    public AccountCreatedPage getAccountCreatedPage() {
+        return accountCreatedPage;
     }
-    public ViewCartPage getViewCartPage() {
-        return viewCartPage;
-    }
+
     public String getCurrentUrl() {
         return webDriver.getCurrentUrl();
     }
-    public String getPageTitle() {
-        return webDriver.getTitle();
+
+    public ProductDetailPage getProductDetailPage() {
+        return productDetailPage;
     }
 
+    public ItemPage getItemPage() {
+    return itemPage;
 }
+
+    public ViewCartPage getViewCartPage() {
+    return viewCartPage;
+    }
+}
+

@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HomePage {
-    private WebDriver driver;
+    private WebDriver webDriver;
 
     private By consentButton = new By.ByClassName("fc-button-label");
     private By addToCartPreBanner = new By.ByXPath("/html/body/section[2]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[1]/a");
@@ -20,40 +20,46 @@ public class HomePage {
     private By cartModalViewCart = new By.ByXPath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a");
     private By viewCartButton = new By.ByClassName("view-cart-button");
     private By viewProductButton = new By.ByClassName("choose");
+    private final By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
+        this.webDriver = driver;
     }
 
     public void clickConsentButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
         WebElement consentButtonAppears = wait.until(ExpectedConditions.elementToBeClickable(consentButton));
         consentButtonAppears.click();
     }
 
     public void clickAddToCart() {
-        Actions action = new Actions(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement addToCartPreBannerElement = driver.findElement(addToCartPreBanner);
+        Actions action = new Actions(webDriver);
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        WebElement addToCartPreBannerElement = webDriver.findElement(addToCartPreBanner);
         action.moveToElement(addToCartPreBannerElement).perform();
         WebElement addToCartAppears = wait.until(ExpectedConditions.elementToBeClickable(addToCartPostBanner));
         addToCartAppears.click();
     }
 
     public boolean isCartModalVisible(){
-        return driver.findElement(cartModal).isDisplayed();
+        return webDriver.findElement(cartModal).isDisplayed();
     }
 
     public void clickContinueShopping(){
-        driver.findElement(cartModalContinue).click();
+        webDriver.findElement(cartModalContinue).click();
     }
 
     public void clickCartModalViewCart(){
-        driver.findElement(cartModalViewCart).click();
+        webDriver.findElement(cartModalViewCart).click();
     }
 
     public void clickViewProductButton(){
-        driver.findElement(viewProductButton).click();
+        webDriver.findElement(viewProductButton).click();
     }
 
+    public void clickDeleteAccount() {
+        WebElement deleteAccountElement = webDriver.findElement(deleteAccountButton);
+        deleteAccountElement.click();
+    }
 }
+
