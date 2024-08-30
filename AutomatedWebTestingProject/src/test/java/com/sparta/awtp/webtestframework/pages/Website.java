@@ -10,7 +10,6 @@ public class Website {
     private final ProductDetailPage productDetailPage;
     private final HomePage homePage;
     private final AccountCreatedPage accountCreatedPage;
-    private final ItemPage itemPage;
     private final ViewCartPage viewCartPage;
 
     public Website(WebDriver webDriver) {
@@ -20,7 +19,6 @@ public class Website {
         this.productDetailPage = new ProductDetailPage(webDriver);
         this.homePage = new HomePage(webDriver);
         this.accountCreatedPage = new AccountCreatedPage(webDriver);
-        this.itemPage = new ItemPage(webDriver);
         this.viewCartPage = new ViewCartPage(webDriver);
     }
 

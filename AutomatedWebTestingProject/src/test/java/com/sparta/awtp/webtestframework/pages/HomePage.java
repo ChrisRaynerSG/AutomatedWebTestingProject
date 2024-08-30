@@ -12,15 +12,16 @@ import java.time.Duration;
 public class HomePage {
     private WebDriver webDriver;
 
-    private By consentButton = new By.ByClassName("fc-button-label");
-    private By addToCartPreBanner = new By.ByXPath("/html/body/section[2]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[1]/a");
-    private By addToCartPostBanner = new By.ByXPath("/html/body/section[2]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[2]/div/a");
-    private By cartModal = new By.ById("cartModal");
-    private By cartModalContinue = new By.ByClassName("close-modal");
-    private By cartModalViewCart = new By.ByXPath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a");
-    private By viewCartButton = new By.ByClassName("view-cart-button");
-    private By viewProductButton = new By.ByClassName("choose");
+    private final By consentButton = new By.ByClassName("fc-button-label");
+    private final By addToCartPreBanner = new By.ByXPath("/html/body/section[2]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[1]/a");
+    private final By addToCartPostBanner = new By.ByXPath("/html/body/section[2]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[2]/div/a");
+    private final By cartModal = new By.ById("cartModal");
+    private final By cartModalContinue = new By.ByClassName("close-modal");
+    private final By cartModalViewCart = new By.ByXPath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a");
+    private final By viewCartButton = new By.ByClassName("view-cart-button");
+    private final By viewProductButton = new By.ByClassName("choose");
     private final By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
+    private final By productsPageButton = new By.ByXPath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[2]/a");
 
     public HomePage(WebDriver driver) {
         this.webDriver = driver;
@@ -60,6 +61,9 @@ public class HomePage {
     public void clickDeleteAccount() {
         WebElement deleteAccountElement = webDriver.findElement(deleteAccountButton);
         deleteAccountElement.click();
+    }
+    public void clickProductsPageButton() {
+        webDriver.findElement(productsPageButton).click();
     }
 }
 

@@ -28,6 +28,12 @@ public class PurchaseStepdefs {
         TestSetup.stopService();
     }
 
+    @Given("I am on the homepage")
+    public void iAmOnTheHomepage() {
+        website = TestSetup.getWebsite(TestSetup.BASE_URL);
+        website.getHomePage().clickConsentButton();
+    }
+
     @When("I click add to cart from products or home")
     public void iClickAddToCartFromProductsOrHome() {
         website = TestSetup.getWebsite(TestSetup.BASE_URL);
@@ -36,7 +42,7 @@ public class PurchaseStepdefs {
     }
     @When("I click add to cart from item page")
     public void iClickAddToCartFromItemPage() {
-        website.getItemPage().clickAddToCart();
+        website.getProductDetailPage().clickAddToCart();
     }
 
     @And("the item is in stock")
@@ -51,12 +57,13 @@ public class PurchaseStepdefs {
 
     @Given("I am on the products page")
     public void iAmOnTheProductsPage() {
+        iAmOnTheHomepage();
+        website.getHomePage().clickProductsPageButton();
     }
 
     @Given("I am on a specific items page")
     public void iAmOnASpecificItemsPage() {
-        website = TestSetup.getWebsite(TestSetup.BASE_URL);
-        website.getHomePage().clickConsentButton();
+        iAmOnTheHomepage();
         website.getHomePage().clickViewProductButton();
     }
 

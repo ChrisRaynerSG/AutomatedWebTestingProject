@@ -18,6 +18,7 @@ public class ProductDetailPage {
     private final By reviewField = new By.ById("review");
     private final By successMessage = new By.ById("review-section");
     private final By submitButton = new By.ById("button-review");
+    private final By addToCart = new By.ByClassName("cart");
 
     public ProductDetailPage(WebDriver webDriver) {
         this.wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
@@ -65,5 +66,8 @@ public class ProductDetailPage {
     public void clickSubmitButton() {
         WebElement submitButtonElement = waitForElementToBeClickable(submitButton);
         submitButtonElement.click();
+    }
+    public void clickAddToCart() {
+        webDriver.findElement(addToCart).click();
     }
 }
