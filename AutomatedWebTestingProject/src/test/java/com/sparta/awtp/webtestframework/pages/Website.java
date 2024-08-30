@@ -6,11 +6,13 @@ public class Website {
     private final WebDriver webDriver;
     private final LoginPage loginPage;
     private final SignupPage signupPage;
+    private final ContactUsPage contactUsPage;
 
     public Website(WebDriver webDriver) {
         this.webDriver = webDriver;
         this.loginPage = new LoginPage(webDriver);
         this.signupPage = new SignupPage(webDriver);
+        this.contactUsPage = new ContactUsPage(webDriver);
     }
 
     public LoginPage getLoginPage() {
@@ -19,6 +21,9 @@ public class Website {
 
     public SignupPage getSignupPage() {
         return signupPage;
+    }
+    public ContactUsPage getContactUsPage(){
+        return contactUsPage;
     }
 
     public String getCurrentUrl() {
