@@ -1,7 +1,7 @@
 Feature: If I enter a valid username and password, I should be able to login
 
   @happy
-  @registration
+    @registration
   Scenario: Login with valid credentials
     Given I am on the login page
     And I have entered the username "abc@abc.abc"

@@ -19,7 +19,6 @@ public class RegistrationStepDefs {
     private Website website;
     private LoginPage loginPage;
     private SignupPage signupPage;
-    private static final String SUCCESS_MESSAGE = "Registration successful"; // Adjust this as needed
     private HomePage homePage;
     private AccountCreatedPage accountCreatedPage;
     private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";

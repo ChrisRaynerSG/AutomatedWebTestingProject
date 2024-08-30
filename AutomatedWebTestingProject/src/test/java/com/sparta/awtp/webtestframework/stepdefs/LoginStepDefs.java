@@ -35,7 +35,6 @@ public class LoginStepDefs {
     public void iHaveEnteredTheUsername(String username) {
         loginPage.handleCookiesPopup();
         loginPage.enterEmailLogin(username);
-
     }
 
     @And("I have entered the password {string}")

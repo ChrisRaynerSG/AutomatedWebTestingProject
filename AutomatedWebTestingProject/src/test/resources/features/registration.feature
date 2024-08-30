@@ -5,7 +5,6 @@ Feature: Registration
   I should then be able to delete my account
 
   @happy
-    @registration
   Scenario Outline: Successful registration
     Given I am on the login page
     And I enter a valid name and email address
