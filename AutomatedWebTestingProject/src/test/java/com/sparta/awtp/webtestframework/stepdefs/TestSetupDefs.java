@@ -15,17 +15,18 @@ public class TestSetupDefs {
 
     private Website website;
     private static final String BASE_URL = "https://automationexercise.com/";
-//    @After
-//    public void afterEach() {
-//        TestSetup.quitWebDriver();
-//        TestSetup.stopService();
-//    }
-//
-//    @Before
-//    public static void setup() throws Exception {
-//        TestSetup.startChromeService();
-//        TestSetup.createWebDriver();
-//    }
+
+    @After("@test")
+    public void afterEach() {
+        TestSetup.quitWebDriver();
+        TestSetup.stopService();
+    }
+
+    @Before("@test")
+    public static void setup() throws Exception {
+        TestSetup.startChromeService();
+        TestSetup.createWebDriver();
+    }
 
 
     @Given("I am on the homepage")

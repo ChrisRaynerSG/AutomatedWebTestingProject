@@ -11,6 +11,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.Objects;
+
 public class ContactUsStepDefs {
     private Website website;
     private ContactUsPage contactUsPage;
@@ -18,13 +20,13 @@ public class ContactUsStepDefs {
     private static final String SUCCESS_MESSAGE = "Success! Your details have been submitted successfully."; // Adjust this as needed
 
 
-    @After
+    @After("@contactus")
     public void afterEach() {
         TestSetup.quitWebDriver();
         TestSetup.stopService();
     }
 
-    @Before
+    @Before("@contactus")
     public static void setup() throws Exception {
         TestSetup.startChromeService();
         TestSetup.createWebDriver();
@@ -59,5 +61,24 @@ public class ContactUsStepDefs {
     public void clickTheSubmitButton() {
         website.getContactUsPage().clickSubmit();
     }
+
+    @When("I enter an invalid email {string}")
+    public void iEnterAnInvalidEmail(String invalidEmail) {
+        if (Objects.equals(invalidEmail, "empty")){
+            website.getContactUsPage().enterEmail("");
+        }else{
+            website.getContactUsPage().enterEmail(invalidEmail);
+        }
+        //correct details:
+        website.getContactUsPage().enterName("Test Name");
+        website.getContactUsPage().enterSubject("Test Subject");
+        website.getContactUsPage().enterMessage("Test Message");
+    }
+
+    @Then("I will be prompted with the message {string}")
+    public void iWillBePromptedWithTheMessage(String expectedErrorMessage) {
+        Assertions.assertTrue(website.getContactUsPage().getErrorPrompt().contains(expectedErrorMessage));
+    }
+
 
 }

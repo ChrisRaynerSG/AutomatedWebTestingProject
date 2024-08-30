@@ -1,12 +1,13 @@
 package com.sparta.awtp.webtestframework.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 
 public class ContactUsPage {
     private WebDriver driver;
@@ -68,17 +69,25 @@ public class ContactUsPage {
     public void clickSubmit() {
         WebElement submitElement = waitForElementToBeClickable(submitButton);
         submitElement.click();
-
-        // Wait for the alert to be present and accept it
-        webDriverWait.until(ExpectedConditions.alertIsPresent());
-        driver.switchTo().alert().accept();
-
-        // Wait for success message to be clickable after alert is accepted
-        WebElement statusElement = waitForElementToBeClickable(successMessage);
-        statusElement.click();
+        //Get rid of popup
+        try {
+            WebElement consentButton = driver.findElement(By.cssSelector(".fc-button.fc-cta-consent.fc-primary-button"));
+            consentButton.click();
+        } catch (NoSuchElementException e) {
+            System.out.println("Consent button not found, proceeding without clicking it.");
+        }
     }
 
     public String getSuccessMessage() {
         return waitForElementToBeClickable(successMessage).getText();
+    }
+
+    public String getErrorPrompt(){
+        WebElement emailField = driver.findElement(By.name("email"));
+        WebElement submitElement = waitForElementToBeClickable(submitButton);
+        submitElement.click();
+        System.out.println(emailField.getAttribute("validationMessage"));
+
+        return emailField.getAttribute("validationMessage");
     }
 }
