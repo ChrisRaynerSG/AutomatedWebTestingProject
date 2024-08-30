@@ -32,6 +32,7 @@ public class TestSetupDefs {
     @Given("I am on the homepage")
     public void iAmOnTheHomePage() {
         website = TestSetup.getWebsite(BASE_URL);
+        website.getHomePage().clickConsentButton();
     }
 
     @Then("The website url should be {string}")
