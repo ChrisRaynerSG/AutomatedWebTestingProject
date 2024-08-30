@@ -52,5 +52,9 @@ public class TestSetup {
         webDriver.get(url);
         return new Website(webDriver);
     }
+
+    public static WebDriver getWebDriver() {
+        return webDriver;
+    }
 }
 
