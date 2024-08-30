@@ -55,16 +55,24 @@ Feature: Purchase item from webpage
   @PurchaseFeature
   Scenario: invalid card details when making payment
     Given I am on the payment page
-    And I have not input my card details
+    And I have input the following card details
+    |        card number        | cvc | expiration date month | expiration date year |
+    |                           |123  |11                     |11                    |
+    |123                        |     |11                     |11                    |
+    |123                        |123  |                       |11                    |
+    |123                        |123  |11                     |                      |
     When I click pay and confirm order
     Then I should be informed what is missing
     And remain on the payment page
+
 
   @Happy
   @PurchaseFeature
   Scenario: make a payment
     Given I am on the payment page
-    And I have input my card details
+    And I have input the following card details
+    |card number|cvc|expiration date month| expiration date year|
+    |123        |123|11                   |11                   |
     When I click pay and confirm order
     Then I should be directed to the payment_done page
     And be informed with the message "Congratulations! Your order has been confirmed!"
