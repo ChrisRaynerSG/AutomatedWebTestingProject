@@ -57,4 +57,9 @@ public class ReviewStepDefs {
     public void iWillNotSeeAMessageInformingMeTheSubmissionIsSuccessful() {
         assertThat(productDetailPage.getSuccessMessage(), is(""));
     }
+
+    @And("I enter a review containing {string}")
+    public void iEnterAReviewContaining(String review) {
+        productDetailPage.enterReview(review);
+    }
 }
