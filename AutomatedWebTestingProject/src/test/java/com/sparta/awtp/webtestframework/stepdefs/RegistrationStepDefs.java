@@ -1,9 +1,7 @@
 package com.sparta.awtp.webtestframework.stepdefs;
 
 import com.sparta.awtp.webtestframework.TestSetup;
-import com.sparta.awtp.webtestframework.pages.LoginPage;
-import com.sparta.awtp.webtestframework.pages.SignupPage;
-import com.sparta.awtp.webtestframework.pages.Website;
+import com.sparta.awtp.webtestframework.pages.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -23,6 +21,8 @@ public class RegistrationStepDefs {
     private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";
     private static final String SIGNUP_PAGE_URL = "https://automationexercise.com/signup";
     private SignupPage signupPage;
+    private HomePage homePage;
+    private AccountCreatedPage accountCreatedPage;
 
     @After
     public void afterEach() {
@@ -37,6 +37,8 @@ public class RegistrationStepDefs {
         website = TestSetup.getWebsite(LOGIN_PAGE_URL);
         loginPage = website.getLoginPage();
         signupPage = website.getSignupPage();
+        homePage = website.getHomePage();
+        accountCreatedPage = website.getAccountCreatedPage();
     }
 
     @Given("I am on the login page")
@@ -46,8 +48,8 @@ public class RegistrationStepDefs {
 
     @And("I enter a valid name and email address")
     public void iEnterAValidNameAndEmailAddress() {
-        loginPage.enterName("TestUserToDelpt");
-        loginPage.enterEmail("testuserpt@example.com");
+        loginPage.enterName("TestUserToDelpt1");
+        loginPage.enterEmail("testuserpt1@example.com");
     }
 
     @And("I click on the sign up button")
@@ -94,5 +96,22 @@ public class RegistrationStepDefs {
         String expectedUrl = "https://automationexercise.com/account_created";
         String actualUrl = website.getCurrentUrl();
         Assertions.assertEquals(expectedUrl, actualUrl, "Registration was not successful. Did not navigate to the account creation confirmation page.");
+    }
+
+    @And("I continue to the home page")
+    public void iContinueToTheHomePage() {
+        accountCreatedPage.clickContinue();
+        String expectedUrl = "https://automationexercise.com/";
+        String actualUrl = website.getCurrentUrl();
+        Assertions.assertEquals(expectedUrl, actualUrl, "Did not navigate to the home page.");
+    }
+
+    @And("I can successfully delete my account")
+    public void iCanSuccessfullyDeleteMyAccount() {
+        homePage.clickDeleteAccount();
+
+        String expectedUrl = "https://automationexercise.com/delete_account";
+        String actualUrl = website.getCurrentUrl();
+        Assertions.assertEquals(expectedUrl, actualUrl, "Account deletion was not successful.");
     }
 }

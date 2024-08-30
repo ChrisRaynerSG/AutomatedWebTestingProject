@@ -1,5 +1,6 @@
 Feature: Registration
   If I enter correct name and email I should be sent to the signup page
+  If I enter all mandatory fields I should be successfully registered
 
   @happy
   Scenario Outline: Successful registration
@@ -19,6 +20,8 @@ Feature: Registration
       | Zipcode              | <zipcode>                   |
       | Mobile Number        | <mobile_number>             |
     Then I am successfully registered
+    And I continue to the home page
+    And I can successfully delete my account
 
     Examples:
       | password | first_name | last_name | address1        | country        | state | city        | zipcode | mobile_number |
