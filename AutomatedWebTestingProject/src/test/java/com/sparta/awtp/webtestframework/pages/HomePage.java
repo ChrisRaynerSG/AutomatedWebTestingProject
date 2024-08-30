@@ -13,8 +13,8 @@ public class HomePage {
     private WebDriver webDriver;
 
     private final By consentButton = new By.ByClassName("fc-button-label");
-    private final By addToCartPreBanner = new By.ByXPath("/html/body/section[2]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[1]/a");
-    private final By addToCartPostBanner = new By.ByXPath("/html/body/section[2]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[2]/div/a");
+    private final By itemElement = new By.ByCssSelector(".right:nth-child(4)");
+    private final By addToCartPostBanner = new By.ByCssSelector(".col-sm-4:nth-child(3) .product-overlay .btn");
     private final By cartModal = new By.ById("cartModal");
     private final By cartModalContinue = new By.ByClassName("close-modal");
     private final By cartModalViewCart = new By.ByXPath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a");
@@ -35,11 +35,9 @@ public class HomePage {
 
     public void clickAddToCart() {
         Actions action = new Actions(webDriver);
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        WebElement addToCartPreBannerElement = webDriver.findElement(addToCartPreBanner);
+        WebElement addToCartPreBannerElement = webDriver.findElement(itemElement);
         action.moveToElement(addToCartPreBannerElement).perform();
-        WebElement addToCartAppears = wait.until(ExpectedConditions.elementToBeClickable(addToCartPostBanner));
-        addToCartAppears.click();
+        webDriver.findElement(addToCartPostBanner).click();
     }
 
     public boolean isCartModalVisible(){

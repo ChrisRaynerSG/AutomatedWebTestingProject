@@ -46,10 +46,6 @@ public class Website {
         return productDetailPage;
     }
 
-    public ItemPage getItemPage() {
-    return itemPage;
-}
-
     public ViewCartPage getViewCartPage() {
     return viewCartPage;
     }
