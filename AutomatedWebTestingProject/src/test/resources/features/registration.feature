@@ -1,6 +1,7 @@
 Feature: Registration
   If I enter correct name and email I should be sent to the signup page
   If I enter all mandatory fields I should be successfully registered
+  I should then be able to delete my account
 
   @happy
   Scenario Outline: Successful registration
