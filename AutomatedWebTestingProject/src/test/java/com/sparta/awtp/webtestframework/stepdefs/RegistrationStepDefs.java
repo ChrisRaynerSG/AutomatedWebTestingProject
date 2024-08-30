@@ -6,10 +6,15 @@ import com.sparta.awtp.webtestframework.pages.SignupPage;
 import com.sparta.awtp.webtestframework.pages.Website;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RegistrationStepDefs {
 
@@ -18,8 +23,6 @@ public class RegistrationStepDefs {
     private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";
     private static final String SIGNUP_PAGE_URL = "https://automationexercise.com/signup";
     private SignupPage signupPage;
-    private static final String SUCCESS_MESSAGE = "Registration successful"; // Adjust this as needed
-
 
     @After
     public void afterEach() {
@@ -28,32 +31,68 @@ public class RegistrationStepDefs {
     }
 
     @Before
-    public static void setup() throws Exception {
+    public void setup() throws Exception {
         TestSetup.startChromeService();
         TestSetup.createWebDriver();
+        website = TestSetup.getWebsite(LOGIN_PAGE_URL);
+        loginPage = website.getLoginPage();
+        signupPage = website.getSignupPage();
     }
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
-        website = TestSetup.getWebsite(LOGIN_PAGE_URL);
-        loginPage = website.getLoginPage();
         loginPage.handleCookiesPopup();  // Handle the cookies popup
     }
 
-    @When("I enter a valid name and email address")
+    @And("I enter a valid name and email address")
     public void iEnterAValidNameAndEmailAddress() {
-        loginPage.enterName("TestUserToDel");
-        loginPage.enterEmail("testusertodel@example.com");
+        loginPage.enterName("TestUserToDelpt");
+        loginPage.enterEmail("testuserpt@example.com");
     }
 
-    @When("I click on the sign up button")
+    @And("I click on the sign up button")
     public void iClickOnTheSignUpButton() {
         loginPage.clickSignUp();
     }
 
-    @Then("I am sent to the signup page")
+    @And("I am sent to the signup page")
     public void iAmSentToTheSignupPage() {
+
         String currentUrl = website.getCurrentUrl();
-        Assertions.assertEquals(SIGNUP_PAGE_URL, currentUrl);
+        Assertions.assertEquals(SIGNUP_PAGE_URL, currentUrl, "Did not navigate to the signup page");
+        Assertions.assertTrue(signupPage.isSignupFormDisplayed(), "Signup form is not displayed");
+    }
+
+    @When("I enter the following information")
+    public void iEnterTheFollowingInformation(io.cucumber.datatable.DataTable dataTable) {
+        List<List<String>> rows = dataTable.asLists(String.class);
+
+        Map<String, String> dataMap = new HashMap<>();
+
+        for (List<String> row : rows) {
+            if (row.size() == 2) {
+                String field = row.get(0).trim();
+                String value = row.get(1).trim();
+                dataMap.put(field, value);
+            }
+        }
+
+        signupPage.enterPassword(dataMap.get("Password"));
+        signupPage.enterFirstName(dataMap.get("First Name"));
+        signupPage.enterLastName(dataMap.get("Last Name"));
+        signupPage.enterAddress1(dataMap.get("Address 1"));
+        signupPage.enterCountry(dataMap.get("Country"));
+        signupPage.enterState(dataMap.get("State"));
+        signupPage.enterCity(dataMap.get("City"));
+        signupPage.enterZipcode(dataMap.get("Zipcode"));
+        signupPage.enterMobileNumber(dataMap.get("Mobile Number"));
+        signupPage.submitRegistrationForm();
+    }
+
+    @Then("I am successfully registered")
+    public void iAmSuccessfullyRegistered() {
+        String expectedUrl = "https://automationexercise.com/account_created";
+        String actualUrl = website.getCurrentUrl();
+        Assertions.assertEquals(expectedUrl, actualUrl, "Registration was not successful. Did not navigate to the account creation confirmation page.");
     }
 }
