@@ -13,6 +13,9 @@ public class LoginPage {
     private final By nameField = By.name("name");
     private final By emailField = By.cssSelector("input[data-qa='signup-email']");
     private final By signUpButton = By.cssSelector("button[data-qa='signup-button']");
+    private final By emailFieldLogin = By.cssSelector("input[data-qa='login-email']");
+    private final By passwordFieldLogin = By.cssSelector("input[data-qa='login-password']");
+    private final By loginButton = By.cssSelector("button[data-qa='login-button']");
 
     public LoginPage(WebDriver webDriver) {
         this.wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
@@ -42,5 +45,22 @@ public class LoginPage {
     public void clickSignUp() {
         WebElement signUpElement = waitForElementToBeClickable(signUpButton);
         signUpElement.click();
+    }
+
+    public void enterEmailLogin(String email) {
+        WebElement emailElement = waitForElementToBeClickable(emailFieldLogin);
+        emailElement.clear();
+        emailElement.sendKeys(email);
+    }
+
+    public void enterPasswordLogin(String password) {
+        WebElement passwordElement = waitForElementToBeClickable(passwordFieldLogin);
+        passwordElement.clear();
+        passwordElement.sendKeys(password);
+    }
+
+    public void clickLoginButton() {
+        WebElement loginButtonElement = waitForElementToBeClickable(loginButton);
+        loginButtonElement.click();
     }
 }

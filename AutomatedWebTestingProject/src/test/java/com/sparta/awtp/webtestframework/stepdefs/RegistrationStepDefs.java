@@ -18,11 +18,12 @@ public class RegistrationStepDefs {
 
     private Website website;
     private LoginPage loginPage;
-    private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";
-    private static final String SIGNUP_PAGE_URL = "https://automationexercise.com/signup";
     private SignupPage signupPage;
     private HomePage homePage;
     private AccountCreatedPage accountCreatedPage;
+    private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";
+    private static final String SIGNUP_PAGE_URL = "https://automationexercise.com/signup";
+
 
     @After
     public void afterEach() {
@@ -43,7 +44,7 @@ public class RegistrationStepDefs {
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
-        loginPage.handleCookiesPopup();  // Handle the cookies popup
+        loginPage.handleCookiesPopup();
     }
 
     @And("I enter a valid name and email address")
