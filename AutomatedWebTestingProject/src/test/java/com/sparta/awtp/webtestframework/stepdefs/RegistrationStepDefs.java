@@ -21,16 +21,17 @@ public class RegistrationStepDefs {
     private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";
     private static final String SIGNUP_PAGE_URL = "https://automationexercise.com/signup";
     private SignupPage signupPage;
+    private static final String SUCCESS_MESSAGE = "Registration successful"; // Adjust this as needed
     private HomePage homePage;
     private AccountCreatedPage accountCreatedPage;
 
-    @After
+    @After("@registration")
     public void afterEach() {
         TestSetup.quitWebDriver();
         TestSetup.stopService();
     }
 
-    @Before
+    @Before("@registration")
     public void setup() throws Exception {
         TestSetup.startChromeService();
         TestSetup.createWebDriver();

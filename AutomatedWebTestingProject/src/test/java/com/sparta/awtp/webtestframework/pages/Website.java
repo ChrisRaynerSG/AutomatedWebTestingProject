@@ -6,6 +6,7 @@ public class Website {
     private final WebDriver webDriver;
     private final LoginPage loginPage;
     private final SignupPage signupPage;
+    private final ProductDetailPage productDetailPage;
     private final HomePage homePage;
     private final AccountCreatedPage accountCreatedPage;
 
@@ -13,6 +14,7 @@ public class Website {
         this.webDriver = webDriver;
         this.loginPage = new LoginPage(webDriver);
         this.signupPage = new SignupPage(webDriver);
+        this.productDetailPage = new ProductDetailPage(webDriver);
         this.homePage = new HomePage(webDriver);
         this.accountCreatedPage = new AccountCreatedPage(webDriver);
     }
@@ -35,5 +37,9 @@ public class Website {
 
     public String getCurrentUrl() {
         return webDriver.getCurrentUrl();
+    }
+
+    public ProductDetailPage getProductDetailPage() {
+        return productDetailPage;
     }
 }
