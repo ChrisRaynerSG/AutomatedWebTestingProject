@@ -3,13 +3,58 @@ package com.sparta.awtp.webtestframework.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage {
-    private final WebDriver webDriver;
+    private WebDriver webDriver;
+
+    private By consentButton = new By.ByClassName("fc-button-label");
+    private By addToCartPreBanner = new By.ByXPath("/html/body/section[2]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[1]/a");
+    private By addToCartPostBanner = new By.ByXPath("/html/body/section[2]/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div[2]/div/a");
+    private By cartModal = new By.ById("cartModal");
+    private By cartModalContinue = new By.ByClassName("close-modal");
+    private By cartModalViewCart = new By.ByXPath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a");
+    private By viewCartButton = new By.ByClassName("view-cart-button");
+    private By viewProductButton = new By.ByClassName("choose");
     private final By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
 
-    public HomePage(WebDriver webDriver) {
-        this.webDriver = webDriver;
+    public HomePage(WebDriver driver) {
+        this.webDriver = driver;
+    }
+
+    public void clickConsentButton() {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        WebElement consentButtonAppears = wait.until(ExpectedConditions.elementToBeClickable(consentButton));
+        consentButtonAppears.click();
+    }
+
+    public void clickAddToCart() {
+        Actions action = new Actions(webDriver);
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        WebElement addToCartPreBannerElement = webDriver.findElement(addToCartPreBanner);
+        action.moveToElement(addToCartPreBannerElement).perform();
+        WebElement addToCartAppears = wait.until(ExpectedConditions.elementToBeClickable(addToCartPostBanner));
+        addToCartAppears.click();
+    }
+
+    public boolean isCartModalVisible(){
+        return webDriver.findElement(cartModal).isDisplayed();
+    }
+
+    public void clickContinueShopping(){
+        webDriver.findElement(cartModalContinue).click();
+    }
+
+    public void clickCartModalViewCart(){
+        webDriver.findElement(cartModalViewCart).click();
+    }
+
+    public void clickViewProductButton(){
+        webDriver.findElement(viewProductButton).click();
     }
 
     public void clickDeleteAccount() {
@@ -17,3 +62,4 @@ public class HomePage {
         deleteAccountElement.click();
     }
 }
+
