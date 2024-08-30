@@ -7,12 +7,16 @@ public class Website {
     private final LoginPage loginPage;
     private final SignupPage signupPage;
     private final ProductDetailPage productDetailPage;
+    private final HomePage homePage;
+    private final AccountCreatedPage accountCreatedPage;
 
     public Website(WebDriver webDriver) {
         this.webDriver = webDriver;
         this.loginPage = new LoginPage(webDriver);
         this.signupPage = new SignupPage(webDriver);
         this.productDetailPage = new ProductDetailPage(webDriver);
+        this.homePage = new HomePage(webDriver);
+        this.accountCreatedPage = new AccountCreatedPage(webDriver);
     }
 
     public LoginPage getLoginPage() {
@@ -21,6 +25,14 @@ public class Website {
 
     public SignupPage getSignupPage() {
         return signupPage;
+    }
+
+    public HomePage getHomePage() {
+        return homePage;
+    }
+
+    public AccountCreatedPage getAccountCreatedPage() {
+        return accountCreatedPage;
     }
 
     public String getCurrentUrl() {

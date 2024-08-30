@@ -9,7 +9,6 @@ import java.time.Duration;
 
 public class LoginPage {
     private final WebDriverWait wait;
-
     private final By cookiesPopupButton = By.cssSelector("button.fc-button.fc-cta-consent.fc-primary-button");
 
     private final By nameField = By.name("name");
