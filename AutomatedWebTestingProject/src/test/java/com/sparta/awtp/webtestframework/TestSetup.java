@@ -1,6 +1,10 @@
 package com.sparta.awtp.webtestframework;
 
 import com.sparta.awtp.webtestframework.pages.Website;
+import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,7 +17,7 @@ import java.time.Duration;
 public class TestSetup {
 
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
-    private static final String BASE_URL = "https://automationexercise.com/";
+    public static final String BASE_URL = "https://automationexercise.com/";
     private static ChromeDriverService service;
     private static WebDriver webDriver;
 
@@ -47,6 +51,10 @@ public class TestSetup {
     public static Website getWebsite(String url) {
         webDriver.get(url);
         return new Website(webDriver);
+    }
+
+    public static WebDriver getWebDriver() {
+        return webDriver;
     }
 }
 
