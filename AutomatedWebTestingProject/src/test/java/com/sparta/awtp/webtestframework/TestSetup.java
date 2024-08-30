@@ -1,6 +1,10 @@
 package com.sparta.awtp.webtestframework;
 
 import com.sparta.awtp.webtestframework.pages.Website;
+import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,7 +24,7 @@ public class TestSetup {
     private static ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        options.addArguments("--headless"); // means it runs in the background without the GUI
+//        options.addArguments("--headless"); // means it runs in the background without the GUI
         options.addArguments("--remote-allow-origins="); // allows access from the test program and CORS
         options.setImplicitWaitTimeout(Duration.ofSeconds(10));
         return options;

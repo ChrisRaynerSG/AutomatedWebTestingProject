@@ -20,19 +20,6 @@ public class RegistrationStepDefs {
     private SignupPage signupPage;
     private static final String SUCCESS_MESSAGE = "Registration successful"; // Adjust this as needed
 
-
-    @After
-    public void afterEach() {
-        TestSetup.quitWebDriver();
-        TestSetup.stopService();
-    }
-
-    @Before
-    public static void setup() throws Exception {
-        TestSetup.startChromeService();
-        TestSetup.createWebDriver();
-    }
-
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
         website = TestSetup.getWebsite(LOGIN_PAGE_URL);
