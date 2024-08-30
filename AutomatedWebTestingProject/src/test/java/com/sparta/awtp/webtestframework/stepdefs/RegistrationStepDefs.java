@@ -115,4 +115,20 @@ public class RegistrationStepDefs {
         String actualUrl = website.getCurrentUrl();
         Assertions.assertEquals(expectedUrl, actualUrl, "Account deletion was not successful.");
     }
+
+    @And("I enter a valid name {string}")
+    public void iEnterAValidName(String name) {
+        loginPage.enterName(name);
+    }
+
+    @And("I enter email address that is already registered {string}")
+    public void iEnterEmailAddressThatIsAlreadyRegistered(String email) {
+        loginPage.enterEmail(email);
+    }
+
+    @Then("error {string} should be displayed")
+    public void errorShouldBeDisplayed(String error) {
+        String actualError = loginPage.getErrorMessage();
+        Assertions.assertEquals(error, actualError, "Error message is not displayed");
+    }
 }

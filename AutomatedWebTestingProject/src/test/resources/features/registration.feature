@@ -28,3 +28,11 @@ Feature: Registration
       | password | first_name | last_name | address1        | country        | state | city        | zipcode | mobile_number |
       | Pass1234 | John       | Doe       | 123 Elm Street  | United States  | CA    | Los Angeles | 90001   | 555-1234      |
     #    | Jane Smith | jane.smith@example.com | Pass5678  | Pass5678        | 22      | July      | 1985     | false       | true          | Jane       | Smith     | Smith Ltd | 456 Oak Avenue     |                | Canada         | ON       | Toronto    | M5A 1A1 | 416-5678      |
+
+  @sad
+  Scenario: register with pre-existing email address
+    Given I am on the login page
+    And I enter a valid name "abc"
+    And I enter email address that is already registered "abc@abc.abc"
+    When I click on the sign up button
+    Then error "Email Address already exist!" should be displayed

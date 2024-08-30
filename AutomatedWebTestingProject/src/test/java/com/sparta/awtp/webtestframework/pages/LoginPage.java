@@ -16,6 +16,7 @@ public class LoginPage {
     private final By emailFieldLogin = By.cssSelector("input[data-qa='login-email']");
     private final By passwordFieldLogin = By.cssSelector("input[data-qa='login-password']");
     private final By loginButton = By.cssSelector("button[data-qa='login-button']");
+    private final By errorMessage = By.cssSelector("p[style='color: red;']");
 
     public LoginPage(WebDriver webDriver) {
         this.wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
@@ -62,5 +63,9 @@ public class LoginPage {
     public void clickLoginButton() {
         WebElement loginButtonElement = waitForElementToBeClickable(loginButton);
         loginButtonElement.click();
+    }
+
+    public String getErrorMessage() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(errorMessage)).getText();
     }
 }
