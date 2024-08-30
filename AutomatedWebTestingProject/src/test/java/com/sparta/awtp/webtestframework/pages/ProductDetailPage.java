@@ -52,7 +52,6 @@ public class ProductDetailPage {
     }
 
     public String getSuccessMessage() {
-        WebElement successMessageElement = waitForElementToBeClickable(successMessage);
         return webDriver.findElement(this.successMessage).getText();
     }
 

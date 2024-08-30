@@ -8,3 +8,10 @@ Feature: Review
     And I enter a valid review
     When I click submit
     Then I see a message informing me the submission is successful
+
+  @Sad
+  Scenario: Leaving a review with no personal details
+    Given I am on the product page
+    And I enter a valid review
+    When I click submit
+    Then I will not see a message informing me the submission is successful

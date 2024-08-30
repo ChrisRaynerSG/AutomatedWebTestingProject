@@ -52,4 +52,9 @@ public class ReviewStepDefs {
     public void iClickSubmit() {
         productDetailPage.clickSubmitButton();
     }
+
+    @Then("I will not see a message informing me the submission is successful")
+    public void iWillNotSeeAMessageInformingMeTheSubmissionIsSuccessful() {
+        assertThat(productDetailPage.getSuccessMessage(), is(""));
+    }
 }
