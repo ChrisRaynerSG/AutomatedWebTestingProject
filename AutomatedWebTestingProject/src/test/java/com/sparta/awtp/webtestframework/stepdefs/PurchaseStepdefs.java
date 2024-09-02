@@ -69,30 +69,35 @@ public class PurchaseStepdefs {
 
     @Given("I am on the view_cart page")
     public void iAmOnTheView_cartPage() {
-        iAmOnTheHomepage();
         iAmOnASpecificItemsPage();
         iClickAddToCartFromItemPage();
-
+        website.getHomePage().clickContinueShopping();
+        website.getProductDetailPage().clickViewCartButton();
     }
 
     @And("I have an item in my cart")
     public void iHaveAnItemInMyCart() {
+        Assertions.assertFalse(website.getViewCartPage().getCartItems().isEmpty());
     }
 
     @And("I am not logged in")
     public void iAmNotLoggedIn() {
+        Assertions.assertFalse(website.getViewCartPage().isUserSignedIn());
     }
 
     @When("I click Proceed to checkout")
     public void iClickProceedToCheckout() {
+        website.getViewCartPage().clickCheckoutButton();
     }
 
     @Then("I should be instructed to login or register")
     public void iShouldBeInstructedToLoginOrRegister() {
+        Assertions.assertTrue(website.getViewCartPage().isLoginModalVisible());
     }
 
     @And("I am logged in")
     public void iAmLoggedIn() {
+
     }
 
     @Then("I should be directed to the checkout page")

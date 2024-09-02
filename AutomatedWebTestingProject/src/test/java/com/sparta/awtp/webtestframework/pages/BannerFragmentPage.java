@@ -9,6 +9,7 @@ public class BannerFragmentPage {
 
     private final By viewCartButton = new By.ByXPath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[3]/a");
     private final By productsPageButton = new By.ByXPath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[2]/a");
+    private final By signupRegisterButton = new By.ByXPath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[4]/a");
 
     public BannerFragmentPage(WebDriver driver) {
         this.driver = driver;
@@ -20,6 +21,10 @@ public class BannerFragmentPage {
 
     public void clickViewCartButton() {
         driver.findElement(viewCartButton).click();
+    }
+
+    public boolean isUserSignedIn(){
+        return driver.findElement(signupRegisterButton).getText().equals(" Logout");
     }
 
 }

@@ -33,16 +33,16 @@ Feature: Purchase item from webpage
     And I am not logged in
     When I click Proceed to checkout
     Then I should be instructed to login or register
-#
-#  @Happy
-#  @PurchaseFeature
-#  Scenario: go to checkout while logged in
-#    Given I am on the view_cart page
-#    And I have an item in my cart
-#    And I am logged in
-#    When I click Proceed to checkout
-#    Then I should be directed to the checkout page
-#    And my address details should be correct
+
+  @Happy
+  @PurchaseFeature
+  Scenario: go to checkout while logged in
+    Given I am on the view_cart page
+    And I have an item in my cart
+    And I am logged in
+    When I click Proceed to checkout
+    Then I should be directed to the checkout page
+    And my address details should be correct
 #
 #  @Happy
 #  @PurchaseFeature

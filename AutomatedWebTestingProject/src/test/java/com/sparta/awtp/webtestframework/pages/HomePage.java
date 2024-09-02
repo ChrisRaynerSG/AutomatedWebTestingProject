@@ -54,10 +54,6 @@ public class HomePage extends BannerFragmentPage {
         return webDriver.findElement(cartModal).isDisplayed();
     }
 
-    public void clickContinueShopping(){
-        webDriver.findElement(cartModalContinue).click();
-    }
-
     public void clickCartModalViewCart(){
         webDriver.findElement(cartModalViewCart).click();
     }
@@ -68,5 +64,8 @@ public class HomePage extends BannerFragmentPage {
     public void clickDeleteAccount() {
         WebElement deleteAccountElement = webDriver.findElement(deleteAccountButton);
         deleteAccountElement.click();
+    }
+    public void clickContinueShopping(){
+        webDriver.findElement(cartModalContinue).click();
     }
 }
