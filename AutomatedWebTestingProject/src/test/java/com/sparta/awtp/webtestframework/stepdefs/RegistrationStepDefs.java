@@ -51,8 +51,8 @@ public class RegistrationStepDefs {
 
     @And("I enter a valid name and email address")
     public void iEnterAValidNameAndEmailAddress() {
-        loginPage.enterName("TestUserToDel");
-        loginPage.enterEmail("testuserdel11@example.com");
+        loginPage.enterName("TestUserToDel1");
+        loginPage.enterEmail("testuserdel111@example.com");
     }
 
     @And("I click on the sign up button")
@@ -140,8 +140,8 @@ public class RegistrationStepDefs {
     }
 
     @Then("I am notified that all mandatory fields are required")
-    public void getFirstNameValidationMessage() {
-        String ValidationMessage = signupPage.getFieldValidationMessage();
-        Assertions.assertEquals("Please fill out this field.", ValidationMessage, "Validation message is incorrect!");
+    public void iAmNotifiedThatAllMandatoryFieldsAreRequired() {
+        String validationMessage = signupPage.getFieldValidationMessage();
+        Assertions.assertEquals("Please fill out this field.", validationMessage, "Validation message is incorrect!");
     }
 }

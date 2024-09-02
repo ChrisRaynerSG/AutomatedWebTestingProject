@@ -63,6 +63,6 @@ Feature: Registration
 
     Examples:
       | password | first_name | last_name | address1       | country       | state | city        | zipcode | mobile_number |
-      |  | John       | Doe       | 123 Elm Street | United States | CA    | Los Angeles | 90001   | 555-1234      |
-      | 1234 | John       | Doe       | 123 Elm Street | United States |     | Los Angeles | 90001   | 555-1234      |
-      | 1234 | John       | Doe       | 123 Elm Street | United States | CA    | Los Angeles |    | 555-1234      |
+      |      | John       | Doe       | 123 Elm Street | United States | CA    | Los Angeles | 90001   | 555-1234      |
+      | 1234 | John       | Doe       | 123 Elm Street | United States |       | Los Angeles | 90001   | 555-1234      |
+      | 1234 | John       | Doe       | 123 Elm Street | United States | CA    | Los Angeles |         | 555-1234      |
