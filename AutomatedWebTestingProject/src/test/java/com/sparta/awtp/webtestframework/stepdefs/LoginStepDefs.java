@@ -1,6 +1,7 @@
 package com.sparta.awtp.webtestframework.stepdefs;
 
 import com.sparta.awtp.webtestframework.TestSetup;
+import com.sparta.awtp.webtestframework.pages.HomePage;
 import com.sparta.awtp.webtestframework.pages.LoginPage;
 import com.sparta.awtp.webtestframework.pages.Website;
 import io.cucumber.java.After;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Assertions;
 public class LoginStepDefs {
     private Website website;
     private LoginPage loginPage;
+    private HomePage homePage;
     private static final String BASE_URL = "https://automationexercise.com/";
     private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";
 
@@ -21,6 +23,7 @@ public class LoginStepDefs {
         TestSetup.startChromeService();
         TestSetup.createWebDriver();
         website = TestSetup.getWebsite(LOGIN_PAGE_URL);
+        homePage = website.getHomePage();
         loginPage = website.getLoginPage();
     }
 
@@ -52,9 +55,20 @@ public class LoginStepDefs {
         Assertions.assertEquals(BASE_URL, actualUrl, "Login was not successful. Did not land on the home page.");
     }
 
-    @Then("I should land get an error message {string}")
-    public void iShouldLandGetAnErrorMessage(String arg0) {
+    @Then("I should get an error message {string}")
+    public void iShouldGetAnErrorMessage(String arg0) {
         String actualErrorMessage = loginPage.getErrorMessage();
         Assertions.assertEquals(arg0, actualErrorMessage, "Error message was not as expected.");
+    }
+
+    @And("I click the logout button")
+    public void iClickTheLogoutButton() {
+        homePage.clickLogoutButton();
+    }
+
+    @Then("I will be logged out and land on the login page")
+    public void iWillBeLoggedOutAndLandOnTheLoginPage() {
+        String actualUrl = website.getCurrentUrl();
+        Assertions.assertEquals(LOGIN_PAGE_URL, actualUrl, "Did not land on the login page after logging out.");
     }
 }

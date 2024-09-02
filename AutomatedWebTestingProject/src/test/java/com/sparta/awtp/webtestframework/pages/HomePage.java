@@ -25,6 +25,7 @@ public class HomePage extends BannerFragmentPage {
     private final By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
     private final By productsPageButton = new By.ByXPath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[2]/a");
     private final By allProducts = new By.ByClassName("all-products");
+    private final By logoutButton = By.linkText("Logout");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -67,5 +68,9 @@ public class HomePage extends BannerFragmentPage {
     }
     public void clickContinueShopping(){
         webDriver.findElement(cartModalContinue).click();
+    }
+
+    public void clickLogoutButton(){
+        webDriver.findElement(logoutButton).click();
     }
 }
