@@ -51,8 +51,8 @@ public class RegistrationStepDefs {
 
     @And("I enter a valid name and email address")
     public void iEnterAValidNameAndEmailAddress() {
-        loginPage.enterName("TestUserToDel");
-        loginPage.enterEmail("testuserdel11@example.com");
+        loginPage.enterName("TestUserToDel1");
+        loginPage.enterEmail("testuserdel111@example.com");
     }
 
     @And("I click on the sign up button")
