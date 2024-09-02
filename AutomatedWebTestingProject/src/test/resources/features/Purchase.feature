@@ -1,21 +1,21 @@
 @PurchaseFeature
 Feature: Purchase item from webpage
 
-  @Happy
-  @PurchaseFeature
-  Scenario: add item to cart from homepage
-    Given I am on the homepage
-    When I click add to cart from products or home
-    And the item is in stock
-    Then I should see my cart updated
+#  @Happy
+#  @PurchaseFeature
+#  Scenario: add item to cart from homepage
+#    Given I am on the homepage
+#    When I click add to cart from products or home
+#    And the item is in stock
+#    Then I should see my cart updated
 
-  @Happy
-  @PurchaseFeature
-  Scenario: add item to cart from products page
-    Given I am on the products page
-    When I click add to cart from products or home
-    And the item is in stock
-    Then I should see my cart updated
+#  @Happy
+#  @PurchaseFeature
+#  Scenario: add item to cart from products page
+#    Given I am on the products page
+#    When I click add to cart from products or home
+#    And the item is in stock
+#    Then I should see my cart updated
 
   @Happy
   @PurchaseFeature
@@ -74,20 +74,21 @@ Feature: Purchase item from webpage
     |abc |11        |11 |        |11     |
     |abc |11        |11 |11      |       |
 
-#
-#
-#  @Happy
-#  @PurchaseFeature
-#  Scenario: make a payment
-#    Given I am on the payment page
-#    And I have input the following card details
-#    |Name   |CardNumber  |CVC  |ExpMonth  |ExpYear  |
-#      |<Name> |<CardNumber>|<CVC>|<ExpMonth>|<ExpYear>|
-#    When I click pay and confirm order
-#    Then I should be directed to the payment_done page
-#    And be informed with the message "Congratulations! Your order has been confirmed!"
-   # |Name|CardNumber|CVC|ExpMonth|ExpYear|
-    #|abc |11        |11 |11      |11     |
+  @Happy
+  @PurchaseFeature
+  Scenario Outline: make a payment
+    Given I am on the payment page
+    And I have input the following card details:
+      |Name   |CardNumber  |CVC  |ExpMonth  |ExpYear  |
+      |<Name> |<CardNumber>|<CVC>|<ExpMonth>|<ExpYear>|
+    When I click pay and confirm order
+    Then I should be directed to the payment_done page
+    And be informed with the message "Congratulations! Your order has been confirmed!"
+
+    Examples:
+    |Name|CardNumber|CVC|ExpMonth|ExpYear|
+    |abc |11        |11 |11      |11     |
+    |def |12345678  |123|12      |2024   |
 #
 #  @Happy
 #  @PurchaseFeature

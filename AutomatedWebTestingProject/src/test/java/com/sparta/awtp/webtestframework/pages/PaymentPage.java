@@ -12,6 +12,7 @@ public class PaymentPage {
     private By expiryDateMonthField = new By.ByClassName("card-expiry-month");
     private By expiryDateYearField = new By.ByClassName("card-expiry-year");
     private By payAndSubmitButton = new By.ById("submit");
+    private By orderConfirmation = new By.ByClassName("col-sm-offset-1");
 
     public PaymentPage(WebDriver driver) {
         this.driver = driver;
@@ -59,6 +60,9 @@ public class PaymentPage {
     }
     public void clickPayAndSubmitButton(){
         driver.findElement(payAndSubmitButton).click();
+    }
+    public String getOrderConfirmation(){
+        return driver.findElement(orderConfirmation).getText();
     }
 }
 

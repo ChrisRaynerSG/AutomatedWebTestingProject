@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
@@ -145,8 +146,9 @@ public class PurchaseStepdefs {
         }
     }
     @When("I click pay and confirm order")
-    public void iClickPayAndConfirmOrder() {
+    public void iClickPayAndConfirmOrder() throws InterruptedException {
         website.getPaymentPage().clickPayAndSubmitButton();
+        Thread.sleep(Duration.ofSeconds(5));
     }
 
     @Then("I should be informed what is missing")
@@ -159,16 +161,14 @@ public class PurchaseStepdefs {
         Assertions.assertEquals(TestSetup.BASE_URL + "payment", TestSetup.getWebDriver().getCurrentUrl());
     }
 
-    @And("I have input my card details")
-    public void iHaveInputMyCardDetails() {
-    }
-
     @Then("I should be directed to the payment_done page")
     public void iShouldBeDirectedToThePayment_donePage() {
+        Assertions.assertEquals(TestSetup.BASE_URL + "payment_done/500", TestSetup.getWebDriver().getCurrentUrl());
     }
 
     @And("be informed with the message {string}")
-    public void beInformedWithTheMessage(String arg0) {
+    public void beInformedWithTheMessage(String message) {
+        Assertions.assertTrue(website.getPaymentPage().getOrderConfirmation().contains(message));
     }
 
     @And("I have items in my cart")
