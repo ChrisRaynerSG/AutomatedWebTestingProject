@@ -148,7 +148,7 @@ public class PurchaseStepdefs {
     @When("I click pay and confirm order")
     public void iClickPayAndConfirmOrder() throws InterruptedException {
         website.getPaymentPage().clickPayAndSubmitButton();
-        Thread.sleep(Duration.ofSeconds(5));
+        Thread.sleep(Duration.ofSeconds(3));
     }
 
     @Then("I should be informed what is missing")
@@ -162,7 +162,8 @@ public class PurchaseStepdefs {
     }
 
     @Then("I should be directed to the payment_done page")
-    public void iShouldBeDirectedToThePayment_donePage() {
+    public void iShouldBeDirectedToThePayment_donePage() throws InterruptedException {
+        Thread.sleep(Duration.ofSeconds(3));
         Assertions.assertEquals(TestSetup.BASE_URL + "payment_done/500", TestSetup.getWebDriver().getCurrentUrl());
     }
 

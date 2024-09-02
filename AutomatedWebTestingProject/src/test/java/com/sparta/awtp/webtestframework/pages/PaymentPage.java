@@ -28,15 +28,15 @@ public class PaymentPage {
     }
     public void enterCardNumber(String cardNumber){
         if(cardNumber == null || cardNumber.isEmpty()){
-            driver.findElement(nameField).sendKeys("");
+            driver.findElement(cardNumberField).sendKeys("");
         }
         else {
-            driver.findElement(nameField).sendKeys(cardNumber);
+            driver.findElement(cardNumberField).sendKeys(cardNumber);
         }
     }
     public void enterCardCvc(String cardCvc){
         if(cardCvc == null || cardCvc.isEmpty()){
-            driver.findElement(nameField).sendKeys("");
+            driver.findElement(cardCvcField).sendKeys("");
         }
         else {
             driver.findElement(cardCvcField).sendKeys(cardCvc);
@@ -44,7 +44,7 @@ public class PaymentPage {
     }
     public void enterExpiryDateMonth(String expiryDateMonth){
         if(expiryDateMonth == null || expiryDateMonth.isEmpty()){
-            driver.findElement(nameField).sendKeys("");
+            driver.findElement(expiryDateMonthField).sendKeys("");
         }
         else {
             driver.findElement(expiryDateMonthField).sendKeys(expiryDateMonth);
@@ -52,7 +52,7 @@ public class PaymentPage {
     }
     public void enterExpiryDateYear(String expiryDateYear){
         if(expiryDateYear == null || expiryDateYear.isEmpty()){
-            driver.findElement(nameField).sendKeys("");
+            driver.findElement(expiryDateYearField).sendKeys("");
         }
         else{
             driver.findElement(expiryDateYearField).sendKeys(expiryDateYear);
