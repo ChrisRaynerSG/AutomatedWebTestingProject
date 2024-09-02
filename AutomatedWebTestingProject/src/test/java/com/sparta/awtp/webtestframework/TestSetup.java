@@ -17,7 +17,7 @@ import java.time.Duration;
 public class TestSetup {
 
     private static final String DRIVER_LOCATION = "src/test/resources/chromedriver.exe";
-    private static final String BASE_URL = "https://automationexercise.com/";
+    public static final String BASE_URL = "https://automationexercise.com/";
     private static ChromeDriverService service;
     private static WebDriver webDriver;
 
@@ -51,6 +51,10 @@ public class TestSetup {
     public static Website getWebsite(String url) {
         webDriver.get(url);
         return new Website(webDriver);
+    }
+
+    public static WebDriver getWebDriver() {
+        return webDriver;
     }
 }
 
