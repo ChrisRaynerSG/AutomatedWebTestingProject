@@ -157,4 +157,14 @@ public class SignupPage {
     public boolean isSignupFormDisplayed() {
         return !webDriver.findElements(submitButton).isEmpty();
     }
+
+    public String getValidationMessage(WebElement element) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
+        return (String) jsExecutor.executeScript("return arguments[0].validationMessage;", element);
+    }
+
+    public String getFieldValidationMessage() {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(passwordField));
+        return getValidationMessage(element);
+    }
 }

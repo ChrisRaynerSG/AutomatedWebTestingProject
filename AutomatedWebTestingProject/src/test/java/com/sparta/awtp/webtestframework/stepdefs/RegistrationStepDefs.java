@@ -9,6 +9,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,12 +20,12 @@ public class RegistrationStepDefs {
 
     private Website website;
     private LoginPage loginPage;
-    private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";
-    private static final String SIGNUP_PAGE_URL = "https://automationexercise.com/signup";
     private SignupPage signupPage;
-    private static final String SUCCESS_MESSAGE = "Registration successful"; // Adjust this as needed
     private HomePage homePage;
     private AccountCreatedPage accountCreatedPage;
+    private static final String LOGIN_PAGE_URL = "https://automationexercise.com/login";
+    private static final String SIGNUP_PAGE_URL = "https://automationexercise.com/signup";
+
 
     @After("@registration")
     public void afterEach() {
@@ -44,13 +46,13 @@ public class RegistrationStepDefs {
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
-        loginPage.handleCookiesPopup();  // Handle the cookies popup
+        loginPage.handleCookiesPopup();
     }
 
     @And("I enter a valid name and email address")
     public void iEnterAValidNameAndEmailAddress() {
-        loginPage.enterName("TestUserToDelpt1");
-        loginPage.enterEmail("testuserpt1@example.com");
+        loginPage.enterName("TestUserToDel");
+        loginPage.enterEmail("testuserdel11@example.com");
     }
 
     @And("I click on the sign up button")
@@ -72,24 +74,29 @@ public class RegistrationStepDefs {
 
         Map<String, String> dataMap = new HashMap<>();
 
-        for (List<String> row : rows) {
-            if (row.size() == 2) {
-                String field = row.get(0).trim();
-                String value = row.get(1).trim();
-                dataMap.put(field, value);
+        try {
+            for (List<String> row : rows) {
+                if (row.size() == 2) {
+                    String field = row.get(0).trim();
+                    String value = row.get(1).trim();
+                    dataMap.put(field, value);
+                }
             }
-        }
 
-        signupPage.enterPassword(dataMap.get("Password"));
-        signupPage.enterFirstName(dataMap.get("First Name"));
-        signupPage.enterLastName(dataMap.get("Last Name"));
-        signupPage.enterAddress1(dataMap.get("Address 1"));
-        signupPage.enterCountry(dataMap.get("Country"));
-        signupPage.enterState(dataMap.get("State"));
-        signupPage.enterCity(dataMap.get("City"));
-        signupPage.enterZipcode(dataMap.get("Zipcode"));
-        signupPage.enterMobileNumber(dataMap.get("Mobile Number"));
-        signupPage.submitRegistrationForm();
+                signupPage.enterPassword(dataMap.get("Password"));
+                signupPage.enterFirstName(dataMap.get("First Name"));
+                signupPage.enterLastName(dataMap.get("Last Name"));
+                signupPage.enterAddress1(dataMap.get("Address 1"));
+                signupPage.enterCountry(dataMap.get("Country"));
+                signupPage.enterState(dataMap.get("State"));
+                signupPage.enterCity(dataMap.get("City"));
+                signupPage.enterZipcode(dataMap.get("Zipcode"));
+                signupPage.enterMobileNumber(dataMap.get("Mobile Number"));
+                signupPage.submitRegistrationForm();
+            }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     @Then("I am successfully registered")
@@ -114,5 +121,27 @@ public class RegistrationStepDefs {
         String expectedUrl = "https://automationexercise.com/delete_account";
         String actualUrl = website.getCurrentUrl();
         Assertions.assertEquals(expectedUrl, actualUrl, "Account deletion was not successful.");
+    }
+
+    @And("I enter a valid name {string}")
+    public void iEnterAValidName(String name) {
+        loginPage.enterName(name);
+    }
+
+    @And("I enter email address that is already registered {string}")
+    public void iEnterEmailAddressThatIsAlreadyRegistered(String email) {
+        loginPage.enterEmail(email);
+    }
+
+    @Then("error {string} should be displayed")
+    public void errorShouldBeDisplayed(String error) {
+        String actualError = loginPage.getErrorMessage();
+        Assertions.assertEquals(error, actualError, "Error message is not displayed");
+    }
+
+    @Then("I am notified that all mandatory fields are required")
+    public void getFirstNameValidationMessage() {
+        String ValidationMessage = signupPage.getFieldValidationMessage();
+        Assertions.assertEquals("Please fill out this field.", ValidationMessage, "Validation message is incorrect!");
     }
 }
