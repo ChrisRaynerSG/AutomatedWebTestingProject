@@ -98,6 +98,8 @@ public class PurchaseStepdefs {
     @And("I am logged in")
     public void iAmLoggedIn() {
 
+        Assertions.assertTrue(website.getViewCartPage().isUserSignedIn());
+
     }
 
     @Then("I should be directed to the checkout page")

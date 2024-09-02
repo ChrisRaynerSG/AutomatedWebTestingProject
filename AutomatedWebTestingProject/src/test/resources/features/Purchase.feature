@@ -43,6 +43,7 @@ Feature: Purchase item from webpage
     When I click Proceed to checkout
     Then I should be directed to the checkout page
     And my address details should be correct
+
 #
 #  @Happy
 #  @PurchaseFeature
