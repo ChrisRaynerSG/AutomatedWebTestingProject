@@ -7,6 +7,7 @@ import com.sparta.awtp.webtestframework.pages.Website;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
@@ -35,7 +36,6 @@ public class LoginStepDefs {
 
     @And("I have entered the username {string}")
     public void iHaveEnteredTheUsername(String username) {
-        loginPage.handleCookiesPopup();
         loginPage.enterEmailLogin(username);
     }
 
@@ -79,5 +79,11 @@ public class LoginStepDefs {
         } catch (Exception e) {
             System.out.println("Delete button is not present as expected.");
         }
+    }
+
+    @Given("I visit the login page")
+    public void iVisitTheLoginPage() {
+        loginPage.handleCookiesPopup();
+        Assertions.assertEquals(LOGIN_PAGE_URL, website.getCurrentUrl(), "Did not land on the login page.");
     }
 }
