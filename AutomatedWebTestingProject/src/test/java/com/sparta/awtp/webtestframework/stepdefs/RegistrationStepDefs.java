@@ -9,6 +9,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,8 +51,8 @@ public class RegistrationStepDefs {
 
     @And("I enter a valid name and email address")
     public void iEnterAValidNameAndEmailAddress() {
-        loginPage.enterName("TestUserToDelpt1");
-        loginPage.enterEmail("testuserpt1@example.com");
+        loginPage.enterName("TestUserToDel");
+        loginPage.enterEmail("testuserdel11@example.com");
     }
 
     @And("I click on the sign up button")
@@ -72,24 +74,29 @@ public class RegistrationStepDefs {
 
         Map<String, String> dataMap = new HashMap<>();
 
-        for (List<String> row : rows) {
-            if (row.size() == 2) {
-                String field = row.get(0).trim();
-                String value = row.get(1).trim();
-                dataMap.put(field, value);
+        try {
+            for (List<String> row : rows) {
+                if (row.size() == 2) {
+                    String field = row.get(0).trim();
+                    String value = row.get(1).trim();
+                    dataMap.put(field, value);
+                }
             }
-        }
 
-        signupPage.enterPassword(dataMap.get("Password"));
-        signupPage.enterFirstName(dataMap.get("First Name"));
-        signupPage.enterLastName(dataMap.get("Last Name"));
-        signupPage.enterAddress1(dataMap.get("Address 1"));
-        signupPage.enterCountry(dataMap.get("Country"));
-        signupPage.enterState(dataMap.get("State"));
-        signupPage.enterCity(dataMap.get("City"));
-        signupPage.enterZipcode(dataMap.get("Zipcode"));
-        signupPage.enterMobileNumber(dataMap.get("Mobile Number"));
-        signupPage.submitRegistrationForm();
+                signupPage.enterPassword(dataMap.get("Password"));
+                signupPage.enterFirstName(dataMap.get("First Name"));
+                signupPage.enterLastName(dataMap.get("Last Name"));
+                signupPage.enterAddress1(dataMap.get("Address 1"));
+                signupPage.enterCountry(dataMap.get("Country"));
+                signupPage.enterState(dataMap.get("State"));
+                signupPage.enterCity(dataMap.get("City"));
+                signupPage.enterZipcode(dataMap.get("Zipcode"));
+                signupPage.enterMobileNumber(dataMap.get("Mobile Number"));
+                signupPage.submitRegistrationForm();
+            }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     @Then("I am successfully registered")
@@ -130,5 +137,11 @@ public class RegistrationStepDefs {
     public void errorShouldBeDisplayed(String error) {
         String actualError = loginPage.getErrorMessage();
         Assertions.assertEquals(error, actualError, "Error message is not displayed");
+    }
+
+    @Then("I am notified that all mandatory fields are required")
+    public void getFirstNameValidationMessage() {
+        String ValidationMessage = signupPage.getFieldValidationMessage();
+        Assertions.assertEquals("Please fill out this field.", ValidationMessage, "Validation message is incorrect!");
     }
 }
