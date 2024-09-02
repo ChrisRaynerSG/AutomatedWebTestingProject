@@ -73,4 +73,8 @@ public class HomePage extends BannerFragmentPage {
     public void clickLogoutButton(){
         webDriver.findElement(logoutButton).click();
     }
+
+    public boolean isDeleteAccountButtonVisible() {
+        return webDriver.findElement(deleteAccountButton).isDisplayed();
+    }
 }

@@ -71,4 +71,13 @@ public class LoginStepDefs {
         String actualUrl = website.getCurrentUrl();
         Assertions.assertEquals(LOGIN_PAGE_URL, actualUrl, "Did not land on the login page after logging out.");
     }
+
+    @And("I should not see the delete account button")
+    public void iShouldNotSeeTheDeleteAccountButton() {
+        try{
+            Assertions.assertFalse(homePage.isDeleteAccountButtonVisible(), "Delete account button was visible when it should not have been.");
+        } catch (Exception e) {
+            System.out.println("Delete button is not present as expected.");
+        }
+    }
 }
