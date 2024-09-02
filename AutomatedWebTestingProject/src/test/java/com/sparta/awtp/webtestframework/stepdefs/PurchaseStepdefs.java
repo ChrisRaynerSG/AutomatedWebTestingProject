@@ -35,7 +35,7 @@ public class PurchaseStepdefs {
     }
 
     @When("I click add to cart from products or home")
-    public void iClickAddToCartFromProductsOrHome() {
+    public void iClickAddToCartFromProductsOrHome() throws InterruptedException {
         website = TestSetup.getWebsite(TestSetup.BASE_URL);
         website.getHomePage().clickConsentButton();
         website.getHomePage().clickAddToCart();
@@ -69,6 +69,10 @@ public class PurchaseStepdefs {
 
     @Given("I am on the view_cart page")
     public void iAmOnTheView_cartPage() {
+        iAmOnTheHomepage();
+        iAmOnASpecificItemsPage();
+        iClickAddToCartFromItemPage();
+
     }
 
     @And("I have an item in my cart")
