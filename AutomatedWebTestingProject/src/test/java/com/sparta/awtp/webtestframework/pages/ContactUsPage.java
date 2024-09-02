@@ -66,15 +66,34 @@ public class ContactUsPage {
         // Add code to upload a file, if necessary.
     }
 
-    public void clickSubmit() {
+    public void clickSubmitContactUs() {
+        // Click the submit button first
         WebElement submitElement = waitForElementToBeClickable(submitButton);
         submitElement.click();
-        //Get rid of popup
+
+        // Handle any potential alerts after clicking the submit button
         try {
-            WebElement consentButton = driver.findElement(By.cssSelector(".fc-button.fc-cta-consent.fc-primary-button"));
+            // Wait for the alert to appear
+            webDriverWait.until(ExpectedConditions.alertIsPresent());
+
+            // Switch to the alert and accept it
+            Alert alert = driver.switchTo().alert();
+            System.out.println("Alert detected with message: " + alert.getText());
+            alert.accept();
+        } catch (TimeoutException e) {
+            System.out.println("No alert appeared after clicking submit.");
+        }
+
+        // Now, handle the consent popup if it appears
+        try {
+            WebElement consentButton = webDriverWait.until(ExpectedConditions.elementToBeClickable(
+                    By.cssSelector(".fc-button.fc-cta-consent.fc-primary-button")));
             consentButton.click();
+            System.out.println("Consent button clicked.");
+        } catch (TimeoutException e) {
+            System.out.println("Consent button did not appear within the timeout period.");
         } catch (NoSuchElementException e) {
-            System.out.println("Consent button not found, proceeding without clicking it.");
+            System.out.println("Consent button not found.");
         }
     }
 

@@ -11,15 +11,15 @@ Feature: Testing the contact us form page
     Scenario: Entering the correct details into the contact us page
       Given I am on the contact us page
       When I enter all the valid details
-      And click the submit button
+      And click the submit button on Contact us page
       Then I will be be promoted with a success message "Success! Your details have been submitted successfully."
 
   @Sad
     @contactus
   Scenario Outline: Testing different combinations of invalid inputs
     Given I am on the contact us page
-    When I enter an invalid email "<emails>"
-    And click the submit button
+    When I enter an invalid email into the Contact Us form"<emails>"
+    And click the submit button on Contact us page
     Then I will be prompted with the message "<result>"
     Examples:
       | emails     | result                      |

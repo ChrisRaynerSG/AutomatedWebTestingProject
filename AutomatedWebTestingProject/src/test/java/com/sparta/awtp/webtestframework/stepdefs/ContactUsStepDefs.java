@@ -57,13 +57,13 @@ public class ContactUsStepDefs {
         Assertions.assertEquals(successMessage, website.getContactUsPage().getSuccessMessage());
     }
 
-    @And("click the submit button")
-    public void clickTheSubmitButton() {
-        website.getContactUsPage().clickSubmit();
+    @And("click the submit button on Contact us page")
+    public void clickTheSubmitButtonOnContactUsPage() {
+        website.getContactUsPage().clickSubmitContactUs();
     }
 
-    @When("I enter an invalid email {string}")
-    public void iEnterAnInvalidEmail(String invalidEmail) {
+    @When("I enter an invalid email into the Contact Us form{string}")
+    public void iEnterAnInvalidEmailIntoTheContactUsForm(String invalidEmail) {
         if (Objects.equals(invalidEmail, "empty")){
             website.getContactUsPage().enterEmail("");
         }else{
@@ -79,6 +79,7 @@ public class ContactUsStepDefs {
     public void iWillBePromptedWithTheMessage(String expectedErrorMessage) {
         Assertions.assertTrue(website.getContactUsPage().getErrorPrompt().contains(expectedErrorMessage));
     }
+
 
 
 }
