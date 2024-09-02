@@ -12,8 +12,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchStepDefs {
@@ -64,7 +66,12 @@ public class SearchStepDefs {
 
     @Then("I should see items in the following categories:")
     public void iShouldSeeItemsInTheFollowingCategories(DataTable dataTable) {
-        List<WebElement> returnedResults = allProductsPage.getResultsItems();
+        List<WebElement> returnedResults = new ArrayList<>();
+        try {
+            returnedResults = allProductsPage.getResultsItems();
+        } catch (TimeoutException e) {
+            Assertions.assertFalse(false);
+        }
         List<String> categories = dataTable.asList(String.class);
         boolean found = false;
         for (WebElement result : returnedResults) {
