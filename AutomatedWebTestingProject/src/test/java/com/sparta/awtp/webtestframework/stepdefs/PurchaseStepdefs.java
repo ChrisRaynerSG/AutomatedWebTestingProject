@@ -20,13 +20,13 @@ public class PurchaseStepdefs {
 
     private Website website;
 
-    @Before("PurchaseFeature")
+    @Before("@PurchaseFeature")
     public void setup() throws IOException {
         TestSetup.startChromeService();
         TestSetup.createWebDriver();
     }
 
-    @After("PurchaseFeature")
+    @After("@PurchaseFeature")
     public void afterEach() {
         TestSetup.quitWebDriver();
         TestSetup.stopService();
