@@ -95,15 +95,19 @@ public class PurchaseStepdefs {
         Assertions.assertTrue(website.getViewCartPage().isLoginModalVisible());
     }
 
-    @And("I am logged in")
-    public void iAmLoggedIn() {
-
-        Assertions.assertTrue(website.getViewCartPage().isUserSignedIn());
-
-    }
+//    @And("I am logged in with <email> and <password>")
+//    public void iAmLoggedIn(String email, String password) {
+//        website.getViewCartPage().clickSignupRegisterButton();
+//        website.getLoginPage().enterEmailLogin(email);
+//        website.getLoginPage().enterPasswordLogin(password);
+//        website.getLoginPage().clickLoginButton();
+//        website.getHomePage().clickViewCartButton();
+//    }
 
     @Then("I should be directed to the checkout page")
     public void iShouldBeDirectedToTheCheckoutPage() {
+        website.getViewCartPage().clickCheckoutButton();
+        Assertions.assertEquals(TestSetup.BASE_URL + "checkout", TestSetup.getWebDriver().getCurrentUrl());
     }
 
     @And("my address details should be correct")
@@ -172,5 +176,14 @@ public class PurchaseStepdefs {
 
     @Then("the item should be removed from my cart")
     public void theItemShouldBeRemovedFromMyCart() {
+    }
+
+    @And("^I am logged in with (.+) and (.+)$")
+    public void iAmLoggedInWithEmailAndPassword(String email, String password) {
+        website.getViewCartPage().clickSignupRegisterButton();
+        website.getLoginPage().enterEmailLogin(email);
+        website.getLoginPage().enterPasswordLogin(password);
+        website.getLoginPage().clickLoginButton();
+        website.getHomePage().clickViewCartButton();
     }
 }

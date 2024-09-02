@@ -36,13 +36,18 @@ Feature: Purchase item from webpage
 
   @Happy
   @PurchaseFeature
-  Scenario: go to checkout while logged in
+  Scenario Outline: go to checkout while logged in
     Given I am on the view_cart page
     And I have an item in my cart
-    And I am logged in
+    And I am logged in with <email> and <password>
     When I click Proceed to checkout
     Then I should be directed to the checkout page
-    And my address details should be correct
+    And my address details should show <firstName> <lastName>
+
+    Examples:
+    |email                 |password      |firstName|lastName|
+    |abc@abc.abc           |abc           |. abc    |abc     |
+    |abc2@abc2.abc         |abc           |joe      |bloggs  |
 
 #
 #  @Happy
