@@ -27,4 +27,10 @@ public class BannerFragmentPage {
         return driver.findElement(signupRegisterButton).getText().equals(" Logout");
     }
 
+    public void clickSignupRegisterButton() {
+        if(!isUserSignedIn()){
+            driver.findElement(signupRegisterButton).click();
+        }
+    }
+
 }
