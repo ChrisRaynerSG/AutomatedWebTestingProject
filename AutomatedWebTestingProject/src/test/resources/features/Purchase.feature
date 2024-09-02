@@ -49,30 +49,31 @@ Feature: Purchase item from webpage
     |abc@abc.abc           |abc           |. abc abc     |
     |abc2@abc2.abc         |abc           |Mr. joe bloggs|
 
+  @Happy
+  @PurchaseFeature
+  Scenario: Place an order
+    Given I am on the checkout page
+    When I click place order
+    Then I should be directed to the payment page
 
+  @Sad
+  @PurchaseFeature
+  Scenario Outline: invalid card details when making payment
+    Given I am on the payment page
+    And I have input the following card details:
+      |Name   |CardNumber  |CVC  |ExpMonth  |ExpYear  |
+      |<Name> |<CardNumber>|<CVC>|<ExpMonth>|<ExpYear>|
+    When I click pay and confirm order
+    Then I should be informed what is missing
+    And remain on the payment page
+  Examples:
+    |Name|CardNumber|CVC|ExpMonth|ExpYear|
+    |    |11        |11 |11      |11     |
+    |abc |          |11 |11      |11     |
+    |abc |11        |   |11      |11     |
+    |abc |11        |11 |        |11     |
+    |abc |11        |11 |11      |       |
 
-
-#
-#  @Happy
-#  @PurchaseFeature
-#  Scenario: Place an order
-#    Given I am on the checkout page
-#    When I click place order
-#    Then I should be directed to the payment page
-#
-#  @Sad
-#  @PurchaseFeature
-#  Scenario: invalid card details when making payment
-#    Given I am on the payment page
-#    And I have input the following card details
-#    |        card number        | cvc | expiration date month | expiration date year |
-#    |                           |123  |11                     |11                    |
-#    |123                        |     |11                     |11                    |
-#    |123                        |123  |                       |11                    |
-#    |123                        |123  |11                     |                      |
-#    When I click pay and confirm order
-#    Then I should be informed what is missing
-#    And remain on the payment page
 #
 #
 #  @Happy
@@ -80,11 +81,13 @@ Feature: Purchase item from webpage
 #  Scenario: make a payment
 #    Given I am on the payment page
 #    And I have input the following card details
-#    |card number|cvc|expiration date month| expiration date year|
-#    |123        |123|11                   |11                   |
+#    |Name   |CardNumber  |CVC  |ExpMonth  |ExpYear  |
+#      |<Name> |<CardNumber>|<CVC>|<ExpMonth>|<ExpYear>|
 #    When I click pay and confirm order
 #    Then I should be directed to the payment_done page
 #    And be informed with the message "Congratulations! Your order has been confirmed!"
+   # |Name|CardNumber|CVC|ExpMonth|ExpYear|
+    #|abc |11        |11 |11      |11     |
 #
 #  @Happy
 #  @PurchaseFeature

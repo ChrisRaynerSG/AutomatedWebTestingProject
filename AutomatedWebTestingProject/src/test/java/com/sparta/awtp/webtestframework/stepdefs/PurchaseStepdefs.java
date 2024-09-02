@@ -2,6 +2,7 @@ package com.sparta.awtp.webtestframework.stepdefs;
 
 import com.sparta.awtp.webtestframework.TestSetup;
 import com.sparta.awtp.webtestframework.pages.Website;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -11,6 +12,8 @@ import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class PurchaseStepdefs {
 
@@ -95,15 +98,6 @@ public class PurchaseStepdefs {
         Assertions.assertTrue(website.getViewCartPage().isLoginModalVisible());
     }
 
-//    @And("I am logged in with <email> and <password>")
-//    public void iAmLoggedIn(String email, String password) {
-//        website.getViewCartPage().clickSignupRegisterButton();
-//        website.getLoginPage().enterEmailLogin(email);
-//        website.getLoginPage().enterPasswordLogin(password);
-//        website.getLoginPage().clickLoginButton();
-//        website.getHomePage().clickViewCartButton();
-//    }
-
     @Then("I should be directed to the checkout page")
     public void iShouldBeDirectedToTheCheckoutPage() {
         Assertions.assertEquals(TestSetup.BASE_URL + "checkout", TestSetup.getWebDriver().getCurrentUrl());
@@ -116,34 +110,53 @@ public class PurchaseStepdefs {
 
     @Given("I am on the checkout page")
     public void iAmOnTheCheckoutPage() {
+        iAmOnASpecificItemsPage();
+        iClickAddToCartFromItemPage();
+        iAmLoggedInWithEmailAndPassword("abc2@abc2.abc","abc");
+        iClickProceedToCheckout();
     }
 
     @When("I click place order")
     public void iClickPlaceOrder() {
+        website.getCheckoutPage().clickPlaceOrderButton();
     }
 
     @Then("I should be directed to the payment page")
     public void iShouldBeDirectedToThePaymentPage() {
+        Assertions.assertEquals(TestSetup.BASE_URL + "payment", TestSetup.getWebDriver().getCurrentUrl());
     }
 
     @Given("I am on the payment page")
     public void iAmOnThePaymentPage() {
+        iAmOnTheCheckoutPage();
+        website.getCheckoutPage().clickPlaceOrderButton();
+
     }
 
-    @And("I have not input my card details")
-    public void iHaveNotInputMyCardDetails() {
+    @And("I have input the following card details:")
+    public void inputCardDetails(DataTable cardDetailsTable) {
+        List<Map<String,String>> cardDetailsList = cardDetailsTable.asMaps();
+        for(Map<String, String> cardDetails : cardDetailsList) {
+            website.getPaymentPage().enterCardName(cardDetails.get("Name"));
+            website.getPaymentPage().enterCardNumber(cardDetails.get("CardNumber"));
+            website.getPaymentPage().enterCardCvc(cardDetails.get("CVC"));
+            website.getPaymentPage().enterExpiryDateMonth("ExpMonth");
+            website.getPaymentPage().enterExpiryDateYear("ExpYear");
+        }
     }
-
     @When("I click pay and confirm order")
     public void iClickPayAndConfirmOrder() {
+        website.getPaymentPage().clickPayAndSubmitButton();
     }
 
     @Then("I should be informed what is missing")
     public void iShouldBeInformedWhatIsMissing() {
+        //not sure how to do this as cannot inspect field popup
     }
 
     @And("remain on the payment page")
     public void remainOnThePaymentPage() {
+        Assertions.assertEquals(TestSetup.BASE_URL + "payment", TestSetup.getWebDriver().getCurrentUrl());
     }
 
     @And("I have input my card details")
@@ -180,10 +193,11 @@ public class PurchaseStepdefs {
 
     @And("^I am logged in with (.+) and (.+)$")
     public void iAmLoggedInWithEmailAndPassword(String email, String password) {
-        website.getViewCartPage().clickSignupRegisterButton();
+        website.getNavBarPage().clickSignupRegisterButton();
         website.getLoginPage().enterEmailLogin(email);
         website.getLoginPage().enterPasswordLogin(password);
         website.getLoginPage().clickLoginButton();
         website.getHomePage().clickViewCartButton();
     }
+
 }
