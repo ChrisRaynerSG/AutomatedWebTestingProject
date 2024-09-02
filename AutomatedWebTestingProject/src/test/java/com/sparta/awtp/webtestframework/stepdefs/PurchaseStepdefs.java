@@ -28,15 +28,21 @@ public class PurchaseStepdefs {
         TestSetup.stopService();
     }
 
+    @Given("I am on the homepage")
+    public void iAmOnTheHomepage() {
+        website = TestSetup.getWebsite(TestSetup.BASE_URL);
+        website.getHomePage().clickConsentButton();
+    }
+
     @When("I click add to cart from products or home")
-    public void iClickAddToCartFromProductsOrHome() {
+    public void iClickAddToCartFromProductsOrHome() throws InterruptedException {
         website = TestSetup.getWebsite(TestSetup.BASE_URL);
         website.getHomePage().clickConsentButton();
         website.getHomePage().clickAddToCart();
     }
     @When("I click add to cart from item page")
     public void iClickAddToCartFromItemPage() {
-        website.getItemPage().clickAddToCart();
+        website.getProductDetailPage().clickAddToCart();
     }
 
     @And("the item is in stock")
@@ -51,37 +57,49 @@ public class PurchaseStepdefs {
 
     @Given("I am on the products page")
     public void iAmOnTheProductsPage() {
+        iAmOnTheHomepage();
+        website.getHomePage().clickProductsPageButton();
     }
 
     @Given("I am on a specific items page")
     public void iAmOnASpecificItemsPage() {
-        website = TestSetup.getWebsite(TestSetup.BASE_URL);
-        website.getHomePage().clickConsentButton();
+        iAmOnTheHomepage();
         website.getHomePage().clickViewProductButton();
     }
 
     @Given("I am on the view_cart page")
     public void iAmOnTheView_cartPage() {
+        iAmOnASpecificItemsPage();
+        iClickAddToCartFromItemPage();
+        website.getHomePage().clickContinueShopping();
+        website.getProductDetailPage().clickViewCartButton();
     }
 
     @And("I have an item in my cart")
     public void iHaveAnItemInMyCart() {
+        Assertions.assertFalse(website.getViewCartPage().getCartItems().isEmpty());
     }
 
     @And("I am not logged in")
     public void iAmNotLoggedIn() {
+        Assertions.assertFalse(website.getViewCartPage().isUserSignedIn());
     }
 
     @When("I click Proceed to checkout")
     public void iClickProceedToCheckout() {
+        website.getViewCartPage().clickCheckoutButton();
     }
 
     @Then("I should be instructed to login or register")
     public void iShouldBeInstructedToLoginOrRegister() {
+        Assertions.assertTrue(website.getViewCartPage().isLoginModalVisible());
     }
 
     @And("I am logged in")
     public void iAmLoggedIn() {
+
+        Assertions.assertTrue(website.getViewCartPage().isUserSignedIn());
+
     }
 
     @Then("I should be directed to the checkout page")

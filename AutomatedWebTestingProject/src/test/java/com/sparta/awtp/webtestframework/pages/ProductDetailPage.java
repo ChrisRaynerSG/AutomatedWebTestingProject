@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class ProductDetailPage {
+public class ProductDetailPage extends BannerFragmentPage {
 
     private final WebDriverWait wait;
     private final WebDriver webDriver;
@@ -18,8 +18,10 @@ public class ProductDetailPage {
     private final By reviewField = new By.ById("review");
     private final By successMessage = new By.ById("review-section");
     private final By submitButton = new By.ById("button-review");
+    private final By addToCart = new By.ByClassName("cart");
 
     public ProductDetailPage(WebDriver webDriver) {
+        super(webDriver);
         this.wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
         this.webDriver = webDriver;
     }
@@ -65,5 +67,8 @@ public class ProductDetailPage {
     public void clickSubmitButton() {
         WebElement submitButtonElement = waitForElementToBeClickable(submitButton);
         submitButtonElement.click();
+    }
+    public void clickAddToCart() {
+        webDriver.findElement(addToCart).click();
     }
 }
