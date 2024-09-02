@@ -21,7 +21,16 @@ These were then used to develop acceptance criteria using Gherkin Syntax, so tha
 
 ## Project setup 
 
-To setup this project the following dependencies are required for the test automation framework to function. These must be placed in the pom.xml of the project.
+To setup this project please follow the below instructions:
+
+1. Clone this project repository onto your local system
+2. Download Chrome web driver from [here](https://storage.googleapis.com/chrome-for-testing-public/128.0.6613.84/win64/chromedriver-win64.zip)
+3. Unzip the folder to access its contents
+4. Add Chrome web driver.exe and LICENCE.chromedriver to your project within your Test resources folder like below:
+
+   <img src = "https://i.imgur.com/EFRlmZ1.png" alt = "chrome driver location">
+
+5. Place the following dependencies within the pom.xml of the project. These are required for the test automation framework to function.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -79,6 +88,7 @@ To setup this project the following dependencies are required for the test autom
 
 </project>
 ```
+6. get testing!
 
 ## Tests
 This test automation framework provides comprehensive end to end testing for the following features on the webpage:
