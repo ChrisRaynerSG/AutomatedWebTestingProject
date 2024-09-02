@@ -106,12 +106,12 @@ public class PurchaseStepdefs {
 
     @Then("I should be directed to the checkout page")
     public void iShouldBeDirectedToTheCheckoutPage() {
-        website.getViewCartPage().clickCheckoutButton();
         Assertions.assertEquals(TestSetup.BASE_URL + "checkout", TestSetup.getWebDriver().getCurrentUrl());
     }
 
-    @And("my address details should be correct")
-    public void myAddressDetailsShouldBeCorrect() {
+    @And("^my address details should show (.+)$")
+    public void myAddressDetailsShouldBeCorrect(String name) {
+        Assertions.assertTrue(website.getCheckoutPage().listContainsName(name));
     }
 
     @Given("I am on the checkout page")

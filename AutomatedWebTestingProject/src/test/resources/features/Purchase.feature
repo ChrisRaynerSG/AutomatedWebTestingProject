@@ -42,12 +42,15 @@ Feature: Purchase item from webpage
     And I am logged in with <email> and <password>
     When I click Proceed to checkout
     Then I should be directed to the checkout page
-    And my address details should show <firstName> <lastName>
+    And my address details should show <name>
 
     Examples:
-    |email                 |password      |firstName|lastName|
-    |abc@abc.abc           |abc           |. abc    |abc     |
-    |abc2@abc2.abc         |abc           |joe      |bloggs  |
+    |email                 |password      |name          |
+    |abc@abc.abc           |abc           |. abc abc     |
+    |abc2@abc2.abc         |abc           |Mr. joe bloggs|
+
+
+
 
 #
 #  @Happy
