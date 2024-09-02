@@ -140,8 +140,8 @@ public class RegistrationStepDefs {
     }
 
     @Then("I am notified that all mandatory fields are required")
-    public void getFirstNameValidationMessage() {
-        String ValidationMessage = signupPage.getFieldValidationMessage();
-        Assertions.assertEquals("Please fill out this field.", ValidationMessage, "Validation message is incorrect!");
+    public void iAmNotifiedThatAllMandatoryFieldsAreRequired() {
+        String validationMessage = signupPage.getFieldValidationMessage();
+        Assertions.assertEquals("Please fill out this field.", validationMessage, "Validation message is incorrect!");
     }
 }
