@@ -51,4 +51,10 @@ public class LoginStepDefs {
         String actualUrl = website.getCurrentUrl();
         Assertions.assertEquals(BASE_URL, actualUrl, "Login was not successful. Did not land on the home page.");
     }
+
+    @Then("I should land get an error message {string}")
+    public void iShouldLandGetAnErrorMessage(String arg0) {
+        String actualErrorMessage = loginPage.getErrorMessage();
+        Assertions.assertEquals(arg0, actualErrorMessage, "Error message was not as expected.");
+    }
 }
